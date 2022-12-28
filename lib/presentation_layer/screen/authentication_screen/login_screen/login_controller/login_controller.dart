@@ -52,6 +52,8 @@ class LoginController extends GetxController {
             print('erorr $respon');
             customSnackBar(respon['message']);
           }
+        } else {
+          customSnackBar('الحساب غير موجود');
         }
       } catch (e) {
         print('catch $e');

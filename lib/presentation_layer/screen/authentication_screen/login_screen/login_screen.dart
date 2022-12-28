@@ -113,7 +113,7 @@ class LoginScreen extends StatelessWidget {
                                 icon: Icons.email_outlined,
                                 valid: (p0) {
                                   return validInput(
-                                      p0.toString(), 5, 100, 'email');
+                                      p0.toString(), 5, 100, 'adsad');
                                 },
                                 onsaved: (p0) {
                                   return controller.emaillog = p0!;

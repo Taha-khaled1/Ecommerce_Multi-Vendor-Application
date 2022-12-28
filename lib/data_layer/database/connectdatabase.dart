@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'package:path/path.dart';
 import 'package:pisti/application_layer/ShardFunction/checkenternet.dart';
 import 'package:pisti/application_layer/ShardFunction/statusrequst.dart';
+import 'package:pisti/presentation_layer/screen/authentication_screen/login_screen/login_controller/login_controller.dart';
 // headers: <String, String>{'Content-Type': 'application/json'},
 // String _basicAuth = 'Basic ${base64Encode(utf8.encode('wael:wael1'))}';
 
@@ -50,9 +51,11 @@ class Curd {
       {bool? encode, Map<String, String>? myheadersres}) async {
     try {
       if (await checkInternet()) {
-        Response respos = await http.post(Uri.parse(url),
-            body: encode == true ? jsonEncode(data) : data,
-            headers: myheadersres);
+        Response respos = await http.post(
+          Uri.parse(url),
+          body: encode == true ? jsonEncode(data) : data,
+          headers: myheadersres,
+        );
         print(respos);
         print(respos.statusCode);
         if (respos.statusCode == 200) {
@@ -60,7 +63,7 @@ class Curd {
           return body;
         } else {
           print('serverfailure');
-          return StatusRequest.serverfailure;
+          return StatusRequest.none;
         }
       } else {
         print('offline');

@@ -5,12 +5,13 @@ import 'package:pisti/presentation_layer/resources/msnge_api.dart';
 loginRes(String email, String pass) async {
   Curd curd = Curd();
   var respons = await curd.postrequest(
-      APiMange.login,
-      {
-        "email": email,
-        "password": pass,
-      },
-      encode: true,
-      myheadersres: myheaders);
+    APiMange.login,
+    {
+      "email": email,
+      "password": pass,
+    },
+    encode: true,
+    myheadersres: myheaders,
+  );
   return respons;
 }
