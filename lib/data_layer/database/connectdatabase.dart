@@ -17,7 +17,6 @@ Map<String, String> myheaders = {
 };
 Map<String, String> myheaders2 = {
   'Content-Type': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
   'Authorization':
       'Bearer ${sharedPreferences.getString('access_token').toString()}',
 };

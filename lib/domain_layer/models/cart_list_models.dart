@@ -34,7 +34,7 @@ class CartItems {
   int? productId;
   String? productName;
   String? productThumbnailImage;
-  Null? variation;
+  String? variation;
   int? price;
   String? currencySymbol;
   int? tax;
