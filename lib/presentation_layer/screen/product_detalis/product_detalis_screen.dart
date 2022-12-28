@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/components/custombutten.dart';
 import 'package:pisti/presentation_layer/components/onlyrating.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
@@ -7,6 +8,7 @@ import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/msnge_api.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/resources/values_manager.dart';
+import 'package:pisti/presentation_layer/screen/authentication_screen/login_screen/login_controller/login_controller.dart';
 import 'package:pisti/presentation_layer/screen/product_detalis/product_detalis_controller/product_detalis_controller.dart';
 import 'package:pisti/presentation_layer/screen/product_detalis/widget/iIncrasing_or_decrasing.dart';
 
@@ -97,11 +99,20 @@ class ProductDetalisScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                IncrasingorDecrasing(
-                                  fontsize: AppSize.s32,
-                                  size: 40,
-                                  onTapAdd: () {},
-                                  onTapmuns: () {},
+                                GetBuilder<ProductDetalisController>(
+                                  builder: (controller) {
+                                    return IncrasingorDecrasing(
+                                      fontsize: AppSize.s32,
+                                      size: 40,
+                                      count: controller.count,
+                                      onTapAdd: () {
+                                        controller.icrasingCount();
+                                      },
+                                      onTapmuns: () {
+                                        controller.decrasingCount();
+                                      },
+                                    );
+                                  },
                                 ),
                                 Text(
                                   controller.productDetalisModels?.data![0]
@@ -125,7 +136,21 @@ class ProductDetalisScreen extends StatelessWidget {
                                   haigh: 47,
                                   color: ColorManager.kPrimary,
                                   text: 'اطلب الحين',
-                                  press: () {},
+                                  press: () {
+                                    if (sharedPreferences.getString('id') !=
+                                        null) {
+                                      controller.addCart(
+                                          sharedPreferences.getString('id')!,
+                                          controller.productDetalisModels
+                                                  ?.data![0].id
+                                                  .toString() ??
+                                              '166',
+                                          controller.count.toString(),
+                                          isAlh7in: true);
+                                    } else {
+                                      customSnackBar('يجب تسجيل الدخول اولا');
+                                    }
+                                  },
                                 ),
                                 CustomButton(
                                   width: 150,
@@ -137,7 +162,19 @@ class ProductDetalisScreen extends StatelessWidget {
                                   sideIs:
                                       BorderSide(color: ColorManager.kPrimary),
                                   text: 'اضف للسلة',
-                                  press: () {},
+                                  press: () {
+                                    sharedPreferences.getString('id') != null
+                                        ? controller.addCart(
+                                            sharedPreferences.getString('id')!,
+                                            controller.productDetalisModels
+                                                    ?.data![0].id
+                                                    .toString() ??
+                                                '166',
+                                            controller.count.toString(),
+                                          )
+                                        : customSnackBar(
+                                            'يجب تسجيل الدخول اولا');
+                                  },
                                 ),
                               ],
                             ),

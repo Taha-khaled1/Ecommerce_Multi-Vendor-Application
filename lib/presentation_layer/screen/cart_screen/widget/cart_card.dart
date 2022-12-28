@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pisti/domain_layer/models/cart_list_models.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
+import 'package:pisti/presentation_layer/resources/msnge_api.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/screen/product_detalis/widget/iIncrasing_or_decrasing.dart';
 
@@ -9,10 +11,10 @@ class CartCard extends StatelessWidget {
   const CartCard({
     Key? key,
     this.index,
-    this.listOfItem,
+    this.cart,
   }) : super(key: key);
+  final CartItems? cart;
 
-  final List? listOfItem;
   final int? index;
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,14 @@ class CartCard extends StatelessWidget {
                   color: const Color(0xFFF5F6F9),
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: Image.asset(
-                  'assets/images/Rectangle 23.png',
-                  fit: BoxFit.cover,
+                child: Image.network(
+                  '${APiMange.baseurlImage}/${cart?.productThumbnailImage}',
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset('assets/images/Rectangle 19.png');
+                  },
+                  width: 200,
+                  height: 210,
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
@@ -41,8 +48,8 @@ class CartCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'شاي مجفف',
+              Text(
+                cart?.productName ?? 'name',
                 style: TextStyle(color: Colors.black, fontSize: 16),
                 maxLines: 2,
               ),
@@ -62,7 +69,7 @@ class CartCard extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: '255',
+                      text: cart?.price.toString() ?? '00',
                       style: MangeStyles().getBoldStyle(
                         color: ColorManager.kPrimary,
                         fontSize: FontSize.s16,
@@ -73,6 +80,7 @@ class CartCard extends StatelessWidget {
               ),
               IncrasingorDecrasing(
                 fontsize: 25,
+                count: 1,
                 size: 30,
                 onTapAdd: () {},
                 onTapmuns: () {},

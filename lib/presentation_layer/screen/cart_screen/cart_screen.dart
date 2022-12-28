@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/Infowidget/ui_components/info_widget.dart';
 import 'package:pisti/presentation_layer/components/appbar1.dart';
 import 'package:pisti/presentation_layer/components/navbar.dart';
@@ -7,6 +8,7 @@ import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
+import 'package:pisti/presentation_layer/screen/cart_screen/cart_controller/cart_controller.dart';
 import 'package:pisti/presentation_layer/screen/cart_screen/widget/cart_card.dart';
 import 'package:pisti/presentation_layer/screen/cart_screen/widget/final_price.dart';
 
@@ -18,6 +20,7 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartController controller = Get.put(CartController());
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: appbar(),
@@ -33,12 +36,50 @@ class CartScreen extends StatelessWidget {
         builder: (context, deviceInfo) {
           return Column(
             children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 9,
-                  itemBuilder: (BuildContext context, int index) {
-                    return const CartCard();
-                  },
+              FutureBuilder(
+                builder: (ctx, snapshot) {
+                  // Checking if future is resolved or not
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    // If we got an error
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text(
+                          '${snapshot.error} occurred',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      );
+
+                      // if we got our data
+                    } else if (snapshot.hasData) {
+                      // Extracting data from snapshot object
+
+                      return Expanded(
+                        child: ListView.builder(
+                          itemCount:
+                              controller.cartListModels?.cartItems!.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return CartCard(
+                              cart:
+                                  controller.cartListModels?.cartItems![index],
+                            );
+                          },
+                        ),
+                      );
+                    }
+                  }
+
+                  // Displaying LoadingSpinner to indicate waiting state
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+
+                // Future that needs to be resolved
+                // inorder to display something on the Canvas
+                future: controller.getCartList(
+                  int.parse(
+                    sharedPreferences.getString('id').toString(),
+                  ),
                 ),
               ),
               Padding(

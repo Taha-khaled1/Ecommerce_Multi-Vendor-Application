@@ -12,11 +12,13 @@ class IncrasingorDecrasing extends StatelessWidget {
     this.onTapAdd,
     this.onTapmuns,
     required this.fontsize,
+    required this.count,
   });
   final double size;
   final void Function()? onTapAdd;
   final void Function()? onTapmuns;
   final double fontsize;
+  final int count;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -25,12 +27,12 @@ class IncrasingorDecrasing extends StatelessWidget {
           size: size,
           icon: Icons.add,
           x: true,
-          onTap: () {},
+          onTap: onTapAdd,
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            '1',
+            count.toString(),
             style: MangeStyles().getRegularStyle(
               color: ColorManager.kTextblack,
               fontSize: fontsize,
@@ -40,7 +42,7 @@ class IncrasingorDecrasing extends StatelessWidget {
         ButtonChange(
           size: size,
           icon: Icons.minimize,
-          onTap: () {},
+          onTap: onTapmuns,
         ),
       ],
     );
