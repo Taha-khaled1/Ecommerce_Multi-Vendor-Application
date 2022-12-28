@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/Infowidget/models/device_info.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
@@ -35,7 +36,7 @@ class CustomAppBarControllerProfile extends StatelessWidget {
                   child: Image.asset('assets/images/Rectangle 13.png'),
                 ),
                 title: Text(
-                  'Hacen111',
+                  sharedPreferences.getString('name') ?? 'name',
                   style: MangeStyles()
                       .getBoldStyle(
                         color: ColorManager.white,
@@ -44,7 +45,7 @@ class CustomAppBarControllerProfile extends StatelessWidget {
                       .copyWith(height: 0.4),
                 ),
                 subtitle: Text(
-                  'Hacen.test@gmail.com',
+                  sharedPreferences.getString('email') ?? 'email',
                   style: MangeStyles()
                       .getRegularStyle(
                         color: ColorManager.white,

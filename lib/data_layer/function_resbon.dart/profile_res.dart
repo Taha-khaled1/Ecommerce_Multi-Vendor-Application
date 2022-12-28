@@ -27,3 +27,14 @@ getCartListRes(int userId) async {
   );
   return respons;
 }
+
+getAddressRes(int userId) async {
+  Curd curd = Curd();
+  var respons = await curd.postrequest(
+    '${APiMange.gteAddressuser}/$userId',
+    {},
+    encode: true,
+    myheadersres: myheaders2,
+  );
+  return respons;
+}

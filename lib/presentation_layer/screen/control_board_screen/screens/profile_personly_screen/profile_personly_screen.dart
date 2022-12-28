@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
@@ -35,7 +36,7 @@ class ProfilePersonlyScreen extends StatelessWidget {
                   backgroundImage: AssetImage('assets/images/Ellipse 1.png'),
                 ),
                 Text(
-                  'Hacen Boudebbane',
+                  sharedPreferences.getString('name')!,
                   style: MangeStyles().getBoldStyle(
                     color: ColorManager.kTextblack,
                     fontSize: FontSize.s25,
@@ -122,12 +123,12 @@ class ListtileModel2 {
 List<ListtileModel2> listtileModel2 = [
   ListtileModel2(
     titel: 'رقم الهاتف',
-    subtitel: '+96658655854',
+    subtitel: sharedPreferences.getString('phone') ?? '011',
     image: 'assets/icons/phone-call-svgrepo-com (2).svg',
   ),
   ListtileModel2(
     titel: 'البريد الإلكتروني',
-    subtitel: 'Hacen.design@gmail.com',
+    subtitel: sharedPreferences.getString('email') ?? 'gmail.com',
     image: 'assets/icons/envelope2.svg',
   ),
   ListtileModel2(
