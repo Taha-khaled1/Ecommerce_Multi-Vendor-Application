@@ -1,3 +1,10 @@
+// class CartModels {
+//   List<CartListModels> ?carModels;
+
+//   colors = json['colors'].cast<String>();
+
+// }
+
 class CartListModels {
   String? name;
   int? ownerId;

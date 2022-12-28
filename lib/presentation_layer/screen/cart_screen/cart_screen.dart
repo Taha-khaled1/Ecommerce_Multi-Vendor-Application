@@ -55,12 +55,11 @@ class CartScreen extends StatelessWidget {
 
                       return Expanded(
                         child: ListView.builder(
-                          itemCount:
-                              controller.cartListModels?.cartItems!.length,
+                          itemCount: controller.carModelsdemo.length,
                           itemBuilder: (BuildContext context, int index) {
+                            print(controller.carModelsdemo[index]);
                             return CartCard(
-                              cart:
-                                  controller.cartListModels?.cartItems![index],
+                              cart: controller.carModelsdemo[index],
                             );
                           },
                         ),

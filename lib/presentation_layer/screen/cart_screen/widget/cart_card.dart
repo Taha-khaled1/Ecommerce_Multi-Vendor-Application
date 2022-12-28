@@ -13,7 +13,7 @@ class CartCard extends StatelessWidget {
     this.index,
     this.cart,
   }) : super(key: key);
-  final CartItems? cart;
+  final CartListModels? cart;
 
   final int? index;
   @override
@@ -33,7 +33,7 @@ class CartCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Image.network(
-                  '${APiMange.baseurlImage}/${cart?.productThumbnailImage}',
+                  '${APiMange.baseurlImage}/${cart?.cartItems![0].productThumbnailImage}',
                   errorBuilder: (context, error, stackTrace) {
                     return Image.asset('assets/images/Rectangle 19.png');
                   },
@@ -49,7 +49,7 @@ class CartCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                cart?.productName ?? 'name',
+                cart?.cartItems![0].productName ?? 'name',
                 style: TextStyle(color: Colors.black, fontSize: 16),
                 maxLines: 2,
               ),
@@ -69,7 +69,7 @@ class CartCard extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: cart?.price.toString() ?? '00',
+                      text: cart?.cartItems![0].price.toString() ?? '00',
                       style: MangeStyles().getBoldStyle(
                         color: ColorManager.kPrimary,
                         fontSize: FontSize.s16,
