@@ -6,7 +6,8 @@ class APiMange {
   static const String bestseller = "$baseurl/products/best-seller";
   static const String productdetalis = "$baseurl/products";
   static const String login = "$baseurl/auth/login";
-
+  static const String wishlists = "$baseurl/wishlists";
+  static const String counters = "$baseurl/profile/counters"; //id
   // static const String products = "$baseurl/products/category";
   ///7?page=1
   // static const String forgotPasswordRoute = "/forgotPassword";

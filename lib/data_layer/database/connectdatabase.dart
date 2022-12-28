@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:path/path.dart';
 import 'package:pisti/application_layer/ShardFunction/checkenternet.dart';
 import 'package:pisti/application_layer/ShardFunction/statusrequst.dart';
-import 'package:pisti/presentation_layer/screen/authentication_screen/login_screen/login_controller/login_controller.dart';
+import 'package:pisti/main.dart';
 // headers: <String, String>{'Content-Type': 'application/json'},
 // String _basicAuth = 'Basic ${base64Encode(utf8.encode('wael:wael1'))}';
 
@@ -16,14 +16,15 @@ Map<String, String> myheaders = {
   'X-Requested-With': 'XMLHttpRequest',
 };
 Map<String, String> myheaders2 = {
-  'Cookie':
-      'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTEyMWI1NmNjOThhYjY0YzI4MTgyOCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzE1NTI0OTN9.J_6IKlm8_vBUI3lMrhWZVLRjHuEMnYkKPew7X4UhFLo; Path=/;'
+  'Content-Type': 'application/json',
+  'X-Requested-With': 'XMLHttpRequest',
+  'Authorization':
+      'Bearer ${sharedPreferences.getString('access_token').toString()}',
 };
 
 Map<String, String> myheaders3 = {
-  'Content-Type': 'application/json',
-  'Cookie':
-      'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTEyMWI1NmNjOThhYjY0YzI4MTgyOCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzE1NTI0OTN9.J_6IKlm8_vBUI3lMrhWZVLRjHuEMnYkKPew7X4UhFLo; Path=/;'
+  'Authorization':
+      'Bearer ${sharedPreferences.getString('access_token').toString()}',
 };
 
 class Curd {
@@ -34,7 +35,7 @@ class Curd {
       print(respos.body);
       print(respos.statusCode);
       print('============');
-      if (respos.statusCode == 200) {
+      if (respos.statusCode == 200 || respos.statusCode == 201) {
         dynamic body = jsonDecode(respos.body);
         print(' body :  $body');
         return body;
@@ -56,9 +57,9 @@ class Curd {
           body: encode == true ? jsonEncode(data) : data,
           headers: myheadersres,
         );
-        print(respos);
+        print(respos.body);
         print(respos.statusCode);
-        if (respos.statusCode == 200) {
+        if (respos.statusCode == 200 || respos.statusCode == 201) {
           dynamic body = jsonDecode(respos.body);
           return body;
         } else {
@@ -83,7 +84,7 @@ class Curd {
           body: encode == true ? jsonEncode(data) : data,
           headers: myheaders2,
         );
-        if (respos.statusCode == 200) {
+        if (respos.statusCode == 200 || respos.statusCode == 201) {
           dynamic body = jsonDecode(respos.body);
           return body;
         } else {

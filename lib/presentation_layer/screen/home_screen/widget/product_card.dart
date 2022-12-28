@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pisti/domain_layer/models/product_models.dart';
+import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/components/onlyrating.dart';
+import 'package:pisti/presentation_layer/handlingView/handlingview.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/msnge_api.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
+import 'package:pisti/presentation_layer/screen/authentication_screen/login_screen/login_controller/login_controller.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_controller/home_controller.dart';
 import 'package:pisti/presentation_layer/screen/initialpage_screen/onboarding_screen/onboarding_screen.dart';
 
 class ProductCard extends StatelessWidget {
@@ -57,13 +61,32 @@ class ProductCard extends StatelessWidget {
                 Positioned(
                   top: 0,
                   left: 0,
-                  child: CircleButton(
-                    size: 36,
-                    sizedsvg: 25,
-                    color1: ColorManager.white,
-                    onTap: () {},
-                    iconData: 'assets/icons/heart.svg',
-                    color2: ColorManager.kPrimary,
+                  child: GetBuilder<HomeController>(
+                    builder: (controller) {
+                      bool x = false;
+                      return HandlingDataView(
+                        statusRequest: controller.statusRequest,
+                        widget: CircleButton(
+                          size: 36,
+                          sizedsvg: 25,
+                          color1: ColorManager.white,
+                          onTap: () {
+                            x == true;
+                            sharedPreferences.getString('id') != null
+                                ? controller.addFavorit(
+                                    int.parse(sharedPreferences
+                                        .getString('id')
+                                        .toString()),
+                                    dataProduct!.id!)
+                                : customSnackBar('يجب تسجيل الدخول اولا');
+                          },
+                          iconData: 'assets/icons/heart.svg',
+                          color2: x == false
+                              ? ColorManager.kPrimary
+                              : ColorManager.error,
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],

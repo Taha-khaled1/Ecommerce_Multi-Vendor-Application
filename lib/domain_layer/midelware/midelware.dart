@@ -11,10 +11,10 @@ class Midelware extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
     if (sharedPreferences.getString('step').toString() == '2'.toString()) {
-      return const RouteSettings(name: 'home');
+      return RouteSettings(name: Routes.homeRoute);
     }
     if (sharedPreferences.getString('step').toString() == '1'.toString()) {
-      return const RouteSettings(name: Routes.loginRoute);
+      return RouteSettings(name: Routes.loginRoute);
     }
     return null;
   }

@@ -16,3 +16,17 @@ getProductOfCatogeryRespon(int idCato, int idPage) async {
   );
   return respons;
 }
+
+favoritRespon(int userId, int productId) async {
+  Curd curd = Curd();
+  var respons = await curd.postrequest(
+    APiMange.wishlists,
+    {
+      'user_id': userId,
+      'product_id': productId,
+    },
+    encode: true,
+    myheadersres: myheaders2,
+  );
+  return respons;
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/Infowidget/ui_components/info_widget.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
@@ -20,7 +21,9 @@ class HomeScreen extends StatelessWidget {
     final HomeController controller = Get.put(HomeController());
     return Scaffold(
       backgroundColor: ColorManager.white,
-      bottomNavigationBar: const BottomNavHomeScreen(),
+      bottomNavigationBar: sharedPreferences.getString('id') != null
+          ? const BottomNavHomeScreen()
+          : SizedBox(),
       appBar: AppBar(
         backgroundColor: ColorManager.white,
         elevation: 0,
