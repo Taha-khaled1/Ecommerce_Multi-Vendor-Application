@@ -10,7 +10,10 @@ import 'package:pisti/application_layer/ShardFunction/statusrequst.dart';
 // headers: <String, String>{'Content-Type': 'application/json'},
 // String _basicAuth = 'Basic ${base64Encode(utf8.encode('wael:wael1'))}';
 
-Map<String, String> myheaders = {'Content-Type': 'application/json'};
+Map<String, String> myheaders = {
+  'Content-Type': 'application/json',
+  'X-Requested-With': 'XMLHttpRequest',
+};
 Map<String, String> myheaders2 = {
   'Cookie':
       'access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTEyMWI1NmNjOThhYjY0YzI4MTgyOCIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NzE1NTI0OTN9.J_6IKlm8_vBUI3lMrhWZVLRjHuEMnYkKPew7X4UhFLo; Path=/;'
@@ -50,17 +53,21 @@ class Curd {
         Response respos = await http.post(Uri.parse(url),
             body: encode == true ? jsonEncode(data) : data,
             headers: myheadersres);
+        print(respos);
+        print(respos.statusCode);
         if (respos.statusCode == 200) {
           dynamic body = jsonDecode(respos.body);
-
           return body;
         } else {
+          print('serverfailure');
           return StatusRequest.serverfailure;
         }
       } else {
+        print('offline');
         return StatusRequest.offlinefailure;
       }
     } catch (e) {
+      print('Catch : $e');
       return StatusRequest.serverfailure;
     }
   }
