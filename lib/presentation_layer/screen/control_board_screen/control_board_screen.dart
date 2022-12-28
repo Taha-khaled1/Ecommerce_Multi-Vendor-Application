@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pisti/presentation_layer/Infowidget/ui_components/info_widget.dart';
 import 'package:pisti/presentation_layer/components/custombutten.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
+import 'package:pisti/presentation_layer/screen/control_board_screen/control_board_controller/control_board_controller.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/allListtileControllerBoard.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/controllerBoardWidget.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/customAppBarControllerProfile.dart';
@@ -14,6 +16,7 @@ class ControlBoardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controlBoardController controller = Get.put(controlBoardController());
     return Scaffold(
       body: InfoWidget(
         builder: (context, deviceInfo) {
@@ -40,7 +43,7 @@ class ControlBoardScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                const ControllerBoardWidget(),
+                ControllerBoardWidget(controller: controller),
                 Padding(
                   padding: const EdgeInsets.only(right: 10.0, bottom: 10.0),
                   child: Align(
