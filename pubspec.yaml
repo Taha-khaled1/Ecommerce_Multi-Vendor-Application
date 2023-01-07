@@ -47,14 +47,11 @@ dependencies:
   device_preview: ^1.1.0
   smooth_page_indicator: ^1.0.0+2
   flutter_rating_bar: ^4.0.1
-  flutter_chat_ui: ^1.6.6
   image_picker: ^0.8.6
   file_picker: ^5.2.4
   path_provider: ^2.0.11
-  uuid: ^3.0.7
-  open_filex: ^4.3.2
-  mime: ^1.0.3
   country_picker: ^2.0.18
+  quickalert: ^1.0.1
 
 
 dev_dependencies:

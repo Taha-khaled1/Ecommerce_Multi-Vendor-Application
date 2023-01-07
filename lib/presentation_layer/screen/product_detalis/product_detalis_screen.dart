@@ -3,14 +3,16 @@ import 'package:get/get.dart';
 import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/components/custombutten.dart';
 import 'package:pisti/presentation_layer/components/onlyrating.dart';
+import 'package:pisti/presentation_layer/components/show_dialog.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/msnge_api.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/resources/values_manager.dart';
-import 'package:pisti/presentation_layer/screen/authentication_screen/login_screen/login_controller/login_controller.dart';
+import 'package:pisti/presentation_layer/screen/initialpage_screen/onboarding_screen/onboarding_screen.dart';
 import 'package:pisti/presentation_layer/screen/product_detalis/product_detalis_controller/product_detalis_controller.dart';
 import 'package:pisti/presentation_layer/screen/product_detalis/widget/iIncrasing_or_decrasing.dart';
+import 'package:quickalert/models/quickalert_type.dart';
 
 class ProductDetalisScreen extends StatelessWidget {
   const ProductDetalisScreen({super.key});
@@ -40,24 +42,37 @@ class ProductDetalisScreen extends StatelessWidget {
 
               return Container(
                 color: Colors.white,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 370,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              '${APiMange.baseurlImage}/${controller.productDetalisModels?.data![0].thumbnailImage.toString()}'),
-                          fit: BoxFit.cover,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topRight,
+                        height: 370,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage(
+                                '${APiMange.baseurlImage}/${controller.productDetalisModels?.data![0].thumbnailImage.toString()}'),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
                         ),
-                        borderRadius: BorderRadius.circular(30),
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8, top: 10),
+                          child: CircleButton(
+                            size: 50,
+                            color1: Colors.grey[200],
+                            onTap: () {
+                              Get.back();
+                            },
+                            iconData: 'assets/icons/arrow.svg',
+                          ),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Padding(
+                      Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: ListView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               controller.productDetalisModels?.data![0].name ??
@@ -76,6 +91,7 @@ class ProductDetalisScreen extends StatelessWidget {
                                 fontSize: FontSize.s16,
                               ),
                             ),
+                            SizedBox(height: 10),
                             RichText(
                               text: TextSpan(
                                 text: 'تم بيعها من قبل :',
@@ -85,8 +101,8 @@ class ProductDetalisScreen extends StatelessWidget {
                                 ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: controller
-                                        .productDetalisModels?.data![0].addedBy,
+                                    text: controller.productDetalisModels
+                                        ?.data![0].shopName,
                                     style: MangeStyles().getRegularStyle(
                                       color: ColorManager.kPrimary,
                                       fontSize: FontSize.s14,
@@ -95,7 +111,13 @@ class ProductDetalisScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            const OnlyRating(nmuberstar: 4),
+                            SizedBox(height: 5),
+                            OnlyRating(
+                              nmuberstar: controller
+                                      .productDetalisModels?.data![0].rating ??
+                                  0,
+                            ),
+                            SizedBox(height: 8),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -140,15 +162,21 @@ class ProductDetalisScreen extends StatelessWidget {
                                     if (sharedPreferences.getString('id') !=
                                         null) {
                                       controller.addCart(
-                                          sharedPreferences.getString('id')!,
-                                          controller.productDetalisModels
-                                                  ?.data![0].id
-                                                  .toString() ??
-                                              '166',
-                                          controller.count.toString(),
-                                          isAlh7in: true);
+                                        sharedPreferences.getString('id')!,
+                                        controller.productDetalisModels
+                                                ?.data![0].id
+                                                .toString() ??
+                                            '166',
+                                        controller.count.toString(),
+                                        context,
+                                        isAlh7in: true,
+                                      );
                                     } else {
-                                      customSnackBar('يجب تسجيل الدخول اولا');
+                                      showDilog(
+                                        context,
+                                        'يجب تسجيل الدخول اولا',
+                                        type: QuickAlertType.error,
+                                      );
                                     }
                                   },
                                 ),
@@ -171,9 +199,10 @@ class ProductDetalisScreen extends StatelessWidget {
                                                     .toString() ??
                                                 '166',
                                             controller.count.toString(),
-                                          )
-                                        : customSnackBar(
-                                            'يجب تسجيل الدخول اولا');
+                                            context)
+                                        : showDilog(
+                                            context, 'يجب تسجيل الدخول اولا',
+                                            type: QuickAlertType.error);
                                   },
                                 ),
                               ],
@@ -195,7 +224,10 @@ class ProductDetalisScreen extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15),
                                   child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      showDilog(
+                                          context, 'تم الاضافه الي المقارنات');
+                                    },
                                     child: Text(
                                       'أضف للمقارنة',
                                       style: MangeStyles().getBoldStyle(
@@ -210,8 +242,8 @@ class ProductDetalisScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             }

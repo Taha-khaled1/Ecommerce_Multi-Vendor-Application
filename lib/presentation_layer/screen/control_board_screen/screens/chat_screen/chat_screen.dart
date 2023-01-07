@@ -6,7 +6,6 @@ import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/resources/values_manager.dart';
-import 'package:pisti/presentation_layer/screen/control_board_screen/screens/massge_screen/massge_screen.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -40,7 +39,7 @@ class ChatScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       return ChatCard(
                         onTap: () {
-                          Get.to(ChatPage());
+                          //   Get.to(ChatPage());
                         },
                       );
                     },

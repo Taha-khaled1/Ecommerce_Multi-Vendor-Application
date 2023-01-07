@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:pisti/domain_layer/models/cart_list_models.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/msnge_api.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
+import 'package:pisti/presentation_layer/screen/cart_screen/cart_controller/cart_controller.dart';
 import 'package:pisti/presentation_layer/screen/product_detalis/widget/iIncrasing_or_decrasing.dart';
 
 class CartCard extends StatelessWidget {
@@ -13,13 +15,13 @@ class CartCard extends StatelessWidget {
     this.index,
     this.cart,
   }) : super(key: key);
-  final CartListModels? cart;
+  final CartItems? cart;
 
   final int? index;
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 13),
       child: Row(
         children: [
           SizedBox(
@@ -33,7 +35,7 @@ class CartCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Image.network(
-                  '${APiMange.baseurlImage}/${cart?.cartItems![0].productThumbnailImage}',
+                  '${APiMange.baseurlImage}/${cart?.productThumbnailImage}',
                   errorBuilder: (context, error, stackTrace) {
                     return Image.asset('assets/images/Rectangle 19.png');
                   },
@@ -48,10 +50,17 @@ class CartCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                cart?.cartItems![0].productName ?? 'name',
-                style: TextStyle(color: Colors.black, fontSize: 16),
-                maxLines: 2,
+              SizedBox(
+                width: 200,
+                child: Text(
+                  cart?.productName ?? 'name', textAlign: TextAlign.right,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                  ),
+                  // maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               RichText(
                 text: TextSpan(
@@ -69,7 +78,7 @@ class CartCard extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: cart?.cartItems![0].price.toString() ?? '00',
+                      text: cart?.price.toString() ?? '00',
                       style: MangeStyles().getBoldStyle(
                         color: ColorManager.kPrimary,
                         fontSize: FontSize.s16,
@@ -78,12 +87,31 @@ class CartCard extends StatelessWidget {
                   ],
                 ),
               ),
-              IncrasingorDecrasing(
-                fontsize: 25,
-                count: 1,
-                size: 30,
-                onTapAdd: () {},
-                onTapmuns: () {},
+              GetBuilder<CartController>(
+                builder: (controller) {
+                  return IncrasingorDecrasing(
+                    fontsize: 25,
+                    count: cart!.quantity!,
+                    size: 30,
+                    onTapAdd: () {
+                      cart!.quantity = cart!.quantity! + 1;
+                      print(cart!.quantity);
+                      controller.icrasingCount(
+                        cart!.quantity!,
+                        cart!.price!.toDouble(),
+                      );
+                    },
+                    onTapmuns: () {
+                      if (cart!.quantity!.toInt() > 1) {
+                        cart!.quantity = cart!.quantity! - 1;
+                      }
+                      controller.decrasingCount(
+                        cart!.quantity!,
+                        cart!.price!.toDouble(),
+                      );
+                    },
+                  );
+                },
               ),
             ],
           ),

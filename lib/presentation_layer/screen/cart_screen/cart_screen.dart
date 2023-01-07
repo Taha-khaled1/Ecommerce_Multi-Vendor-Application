@@ -27,7 +27,7 @@ class CartScreen extends StatelessWidget {
       bottomNavigationBar: BottomNavAuth(
         press: () {
           xtemp == false
-              ? Get.toNamed(Routes.shippingInfoRoute)
+              ? Get.toNamed(Routes.shippingInfoRoute, arguments: {'cart': true})
               : Get.toNamed(Routes.sucssRoute);
         },
         text: 'تابع للشحن',
@@ -57,7 +57,6 @@ class CartScreen extends StatelessWidget {
                         child: ListView.builder(
                           itemCount: controller.carModelsdemo.length,
                           itemBuilder: (BuildContext context, int index) {
-                            print(controller.carModelsdemo[index]);
                             return CartCard(
                               cart: controller.carModelsdemo[index],
                             );
@@ -89,20 +88,24 @@ class CartScreen extends StatelessWidget {
                       thickness: 2,
                     ),
                     xtemp == false
-                        ? Column(
-                            children: const [
-                              FinalPrice(
-                                title: 'المجموع الفرعي',
-                                price: '255',
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              FinalPrice(
-                                title: 'ضريبة',
-                                price: '21.00',
-                              ),
-                            ],
+                        ? GetBuilder<CartController>(
+                            builder: (controller) {
+                              return Column(
+                                children: [
+                                  FinalPrice(
+                                    title: 'المجموع الفرعي',
+                                    price: controller.totelPrice.toString(),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  FinalPrice(
+                                    title: 'ضريبة',
+                                    price: controller.totelTex.toString(),
+                                  ),
+                                ],
+                              );
+                            },
                           )
                         : Column(
                             mainAxisAlignment: MainAxisAlignment.start,

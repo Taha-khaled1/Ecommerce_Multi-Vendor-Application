@@ -12,7 +12,7 @@ class ControllerBoardWidget extends StatelessWidget {
     Key? key,
     required this.controller,
   }) : super(key: key);
-  final controlBoardController controller;
+  final ControlBoardController controller;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

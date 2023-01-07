@@ -18,7 +18,7 @@ class AddressScreen extends StatelessWidget {
       appBar: appbar(),
       bottomNavigationBar: BottomNavAuth(
         press: () {
-          Get.toNamed(Routes.shippingInfoRoute);
+          //  Get.toNamed(Routes.shippingInfoRoute,arguments: {'cart':true});
         },
         text: 'حفظ',
       ),

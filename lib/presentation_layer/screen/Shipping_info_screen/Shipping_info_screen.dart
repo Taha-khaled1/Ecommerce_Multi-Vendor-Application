@@ -17,17 +17,20 @@ class ShippingInfoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isCart = Get.arguments['cart'];
+
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: appbar(),
-      bottomNavigationBar: BottomNavAuth(
-        press: () {
-          Get.toNamed(Routes.cart);
-          xtemp = true;
-          ctemp = true;
-        },
-        text: 'تابع الى معلومات التسليم',
-      ),
+      bottomNavigationBar: isCart == true
+          ? BottomNavAuth(
+              press: () {
+                Get.toNamed(Routes.cart);
+                xtemp = true;
+                ctemp = true;
+              },
+              text: 'تابع الى معلومات التسليم')
+          : SizedBox(),
       body: InfoWidget(
         builder: (context, deviceInfo) {
           return ListView(
@@ -35,7 +38,7 @@ class ShippingInfoScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.topRight,
                 child: Text(
-                  'معلومات الشحن',
+                  isCart == true ? 'معلومات الشحن' : 'العناوين',
                   style: MangeStyles().getRegularStyle(
                     color: ColorManager.kPrimary,
                     fontSize: FontSize.s25,

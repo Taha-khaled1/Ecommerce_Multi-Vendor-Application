@@ -16,7 +16,7 @@ class ControlBoardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controlBoardController controller = Get.put(controlBoardController());
+    final ControlBoardController controller = Get.put(ControlBoardController());
     return Scaffold(
       body: InfoWidget(
         builder: (context, deviceInfo) {
@@ -67,7 +67,7 @@ class ControlBoardScreen extends StatelessWidget {
                   color: ColorManager.kPrimary,
                   text: 'سجل متجرك',
                   press: () {
-                    registerShope();
+                    registerShope(controller: controller);
                   },
                 ),
                 const SizedBox(

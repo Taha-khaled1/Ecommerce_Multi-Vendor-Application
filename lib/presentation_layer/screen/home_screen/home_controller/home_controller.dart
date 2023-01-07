@@ -1,4 +1,3 @@
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:get/get.dart';
 import 'package:pisti/application_layer/ShardFunction/handling.dart';
 import 'package:pisti/application_layer/ShardFunction/statusrequst.dart';
@@ -40,7 +39,7 @@ class HomeController extends GetxController {
       return response;
     } catch (e) {
       print(' erorr catch $e');
-      return error;
+      return 'error';
     }
   }
 
@@ -51,7 +50,7 @@ class HomeController extends GetxController {
       return response;
     } catch (e) {
       print(' erorr catch $e');
-      return error;
+      return 'error';
     }
   }
 

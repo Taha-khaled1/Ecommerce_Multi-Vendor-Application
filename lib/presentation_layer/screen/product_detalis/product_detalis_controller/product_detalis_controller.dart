@@ -1,10 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pisti/application_layer/ShardFunction/handling.dart';
 import 'package:pisti/application_layer/ShardFunction/statusrequst.dart';
 import 'package:pisti/data_layer/function_resbon.dart/product_detalis_res.dart';
 import 'package:pisti/domain_layer/models/product_detalis_models.dart';
+import 'package:pisti/main.dart';
+import 'package:pisti/presentation_layer/components/show_dialog.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/screen/authentication_screen/login_screen/login_controller/login_controller.dart';
+import 'package:quickalert/models/quickalert_type.dart';
 
 class ProductDetalisController extends GetxController {
   int count = 1;
@@ -34,7 +38,7 @@ class ProductDetalisController extends GetxController {
   }
 
   StatusRequest statusRequest = StatusRequest.none;
-  addCart(String userId, String productId, String quanty,
+  addCart(String userId, String productId, String quanty, BuildContext context,
       {bool isAlh7in = false}) async {
     statusRequest = StatusRequest.loading;
     update();
@@ -42,16 +46,19 @@ class ProductDetalisController extends GetxController {
     statusRequest = handlingData(respon);
     try {
       if (StatusRequest.success == statusRequest) {
+        print(sharedPreferences.getString('id'));
         if (respon["result"].toString() == 'true') {
           statusRequest = StatusRequest.none;
-          customSnackBar('تم اضافة المنتج بنجاح');
+          isAlh7in
+              ? customSnackBar('تم الاضافه الي السله بنجاح')
+              : showDilog(context, 'تم الاضافه الي السله بنجاح');
           isAlh7in ? gotoCartscreen() : null;
         } else {
           statusRequest = StatusRequest.none;
           customSnackBar(respon['message']);
         }
       } else {
-        customSnackBar('يرجي تسجيل الدخول اولا');
+        showDilog(context, 'يجب تسجيل الدخول اولا', type: QuickAlertType.error);
       }
     } catch (e) {
       print('catch $e');

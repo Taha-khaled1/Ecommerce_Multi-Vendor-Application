@@ -75,22 +75,11 @@ class AllListtileControllerBoard extends StatelessWidget {
               image: 'assets/icons/map-pin.svg', //assets/icons/Frame 19.svg
               titel: 'العناوين',
               onTap: () {
-                Get.toNamed(Routes.shippingInfoRoute);
+                Get.toNamed(Routes.shippingInfoRoute,
+                    arguments: {'cart': false});
               },
             ),
-            CustomListtile(
-              image: 'assets/icons/calendar.svg', //assets/icons/Frame 27.svg
-              titel: 'تاريخ دفع',
-              onTap: () {},
-            ),
           ],
-        ),
-        CustomListtile(
-          image: 'assets/icons/Frame 24.svg', //assets/icons/Frame 24.svg
-          titel: 'بطاقة الدعم',
-          onTap: () {
-            Get.toNamed(Routes.cardSupportScreen);
-          },
         ),
         CustomListtile(
           image:
