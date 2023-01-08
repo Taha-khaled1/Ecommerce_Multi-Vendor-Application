@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pisti/application_layer/ShardFunction/valid.dart';
 import 'package:pisti/presentation_layer/Infowidget/ui_components/info_widget.dart';
 import 'package:pisti/presentation_layer/components/customtextfild.dart';
+import 'package:pisti/presentation_layer/handlingView/handlingview.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/screen/initialpage_screen/onboarding_screen/onboarding_screen.dart';
+import 'package:pisti/presentation_layer/screen/support_screen/support_controller/support_controller.dart';
 
 class SupportProblemScreen extends StatelessWidget {
   const SupportProblemScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    SupportController controller = Get.put(SupportController());
     return Scaffold(
       backgroundColor: Colors.white.withOpacity(0.8),
       body: InfoWidget(
@@ -49,102 +54,108 @@ class SupportProblemScreen extends StatelessWidget {
                     child: Stack(
                       children: [
                         SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'ابقى معنا على تواصل',
-                                  style: MangeStyles().getBoldStyle(
-                                    color: ColorManager.kTextblack,
-                                    fontSize: FontSize.s22,
+                          child: Form(
+                            key: controller.formkeysigin,
+                            child: Column(
+                              children: [
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'ابقى معنا على تواصل',
+                                    style: MangeStyles().getBoldStyle(
+                                      color: ColorManager.kTextblack,
+                                      fontSize: FontSize.s22,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 8),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  'إذا كان هناك أي مشاكل تريد إخبارنا بها أو أي شيء يمكننا مساعدتك فيه. ما عليك سوى ملء المربع أدناه وسنتواصل معك في أسرع وقت ممكن',
-                                  style: MangeStyles().getBoldStyle(
-                                    color: ColorManager.kTextlightgray,
-                                    fontSize: FontSize.s14,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  'الاسم واللقب',
-                                  style: MangeStyles().getBoldStyle(
-                                    color: ColorManager.kPrimary,
-                                    fontSize: FontSize.s20,
+                                const SizedBox(height: 8),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'إذا كان هناك أي مشاكل تريد إخبارنا بها أو أي شيء يمكننا مساعدتك فيه. ما عليك سوى ملء المربع أدناه وسنتواصل معك في أسرع وقت ممكن',
+                                    style: MangeStyles().getBoldStyle(
+                                      color: ColorManager.kTextlightgray,
+                                      fontSize: FontSize.s14,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
                                 ),
-                              ),
-                              CustomTextfeild(
-                                valid: (p0) {
-                                  return null;
-                                },
-                                onsaved: (p0) {
-                                  return null;
-                                },
-                                titel: 'الاسم واللقب',
-                                width: deviceInfo.localWidth * 0.85,
-                                height: 70,
-                                isenabledBorder: false,
-                              ),
-                              const SizedBox(height: 8),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  'البريد الالكتروني',
-                                  style: MangeStyles().getBoldStyle(
-                                    color: ColorManager.kPrimary,
-                                    fontSize: FontSize.s20,
+                                const SizedBox(height: 8),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    'الاسم واللقب',
+                                    style: MangeStyles().getBoldStyle(
+                                      color: ColorManager.kPrimary,
+                                      fontSize: FontSize.s20,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              CustomTextfeild(
-                                valid: (p0) {
-                                  return null;
-                                },
-                                onsaved: (p0) {
-                                  return null;
-                                },
-                                titel: 'الاسم',
-                                width: deviceInfo.localWidth * 0.85,
-                                height: 70,
-                                isenabledBorder: false,
-                              ),
-                              const SizedBox(height: 8),
-                              Align(
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  'الرسالة',
-                                  style: MangeStyles().getBoldStyle(
-                                    color: ColorManager.kPrimary,
-                                    fontSize: FontSize.s20,
+                                CustomTextfeild(
+                                  valid: (p0) {
+                                    return validInput(
+                                        p0.toString(), 2, 100, 'name');
+                                  },
+                                  onsaved: (p0) {
+                                    return controller.name = p0!;
+                                  },
+                                  titel: 'الاسم واللقب',
+                                  width: deviceInfo.localWidth * 0.85,
+                                  height: 70,
+                                  isenabledBorder: false,
+                                ),
+                                const SizedBox(height: 8),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    'البريد الالكتروني',
+                                    style: MangeStyles().getBoldStyle(
+                                      color: ColorManager.kPrimary,
+                                      fontSize: FontSize.s20,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              CustomTextfeild(
-                                fillColor: ColorManager.grey2,
-                                maxLines: 8,
-                                valid: (p0) {
-                                  return null;
-                                },
-                                onsaved: (p0) {
-                                  return null;
-                                },
-                                titel: 'اترك رسالتك هنا ...',
-                                width: deviceInfo.localWidth * 0.85,
-                                height: 140,
-                                isBoarder: BorderStyle.none,
-                              ),
-                            ],
+                                CustomTextfeild(
+                                  valid: (p0) {
+                                    return validInput(
+                                        p0.toString(), 5, 100, 'email');
+                                  },
+                                  onsaved: (p0) {
+                                    return controller.email = p0!;
+                                  },
+                                  titel: 'البريد الاكتروني',
+                                  width: deviceInfo.localWidth * 0.85,
+                                  height: 70,
+                                  isenabledBorder: false,
+                                ),
+                                const SizedBox(height: 8),
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Text(
+                                    'الرسالة',
+                                    style: MangeStyles().getBoldStyle(
+                                      color: ColorManager.kPrimary,
+                                      fontSize: FontSize.s20,
+                                    ),
+                                  ),
+                                ),
+                                CustomTextfeild(
+                                  fillColor: ColorManager.grey2,
+                                  maxLines: 8,
+                                  valid: (p0) {
+                                    return validInput(
+                                        p0.toString(), 10, 400, 'massge');
+                                  },
+                                  onsaved: (p0) {
+                                    return controller.message = p0!;
+                                  },
+                                  titel: 'اترك رسالتك هنا ...',
+                                  width: deviceInfo.localWidth * 0.85,
+                                  height: 140,
+                                  isBoarder: BorderStyle.none,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         Positioned(
@@ -153,10 +164,19 @@ class SupportProblemScreen extends StatelessWidget {
                           right: 0,
                           child: Transform.translate(
                             offset: const Offset(0, 30),
-                            child: CircleButton(
-                              color1: ColorManager.controlercolor,
-                              onTap: () {},
-                              iconData: 'assets/icons/send.svg',
+                            child: GetBuilder<SupportController>(
+                              builder: (controller) {
+                                return HandlingDataView(
+                                  statusRequest: controller.statusRequest,
+                                  widget: CircleButton(
+                                    color1: ColorManager.controlercolor,
+                                    onTap: () {
+                                      controller.contactUs(context);
+                                    },
+                                    iconData: 'assets/icons/send.svg',
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         )

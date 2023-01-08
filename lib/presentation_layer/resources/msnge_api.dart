@@ -14,6 +14,7 @@ class APiMange {
   static const String gteAddressuser = "$baseurl/user/shipping/address"; //id
   static const String getaddress = "$baseurl/user/shipping/address";
   static const String requestShope = "$baseurl/send-seller-request";
+  static const String sendcontact = "$baseurl/send-contact";
   // static const String products = "$baseurl/products/category";
   ///7?page=1
   // static const String forgotPasswordRoute = "/forgotPassword";
