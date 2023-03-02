@@ -21,9 +21,7 @@ class HomeScreen extends StatelessWidget {
     final HomeController controller = Get.put(HomeController());
     return Scaffold(
       backgroundColor: ColorManager.white,
-      bottomNavigationBar: sharedPreferences.getString('id') != null
-          ? const BottomNavHomeScreen()
-          : SizedBox(),
+      bottomNavigationBar: const BottomNavHomeScreen(),
       appBar: AppBar(
         backgroundColor: ColorManager.white,
         elevation: 0,

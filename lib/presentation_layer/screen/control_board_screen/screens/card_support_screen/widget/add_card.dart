@@ -49,8 +49,12 @@ void addCard() {
                       ),
                       const SizedBox(height: 8),
                       CustomTextfeild(
-                        valid: (p0) {},
-                        onsaved: (p0) {},
+                        valid: (p0) {
+                          return null;
+                        },
+                        onsaved: (p0) {
+                          return null;
+                        },
                         titel: 'Enter your name as written on card',
                         width: deviceInfo.localWidth,
                         height: 60,
@@ -65,8 +69,12 @@ void addCard() {
                       ),
                       const SizedBox(height: 8),
                       CustomTextfeild(
-                        valid: (p0) {},
-                        onsaved: (p0) {},
+                        valid: (p0) {
+                          return null;
+                        },
+                        onsaved: (p0) {
+                          return null;
+                        },
                         titel: 'Enter card number',
                         width: deviceInfo.localWidth,
                         height: 60,
@@ -87,8 +95,12 @@ void addCard() {
                                 ),
                                 const SizedBox(height: 8),
                                 CustomTextfeild(
-                                  valid: (p0) {},
-                                  onsaved: (p0) {},
+                                  valid: (p0) {
+                                    return null;
+                                  },
+                                  onsaved: (p0) {
+                                    return null;
+                                  },
                                   titel: '123',
                                   width: deviceInfo.localWidth,
                                   height: 60,
@@ -110,8 +122,12 @@ void addCard() {
                                 ),
                                 const SizedBox(height: 8),
                                 CustomTextfeild(
-                                  valid: (p0) {},
-                                  onsaved: (p0) {},
+                                  valid: (p0) {
+                                    return null;
+                                  },
+                                  onsaved: (p0) {
+                                    return null;
+                                  },
                                   titel: '20/20',
                                   width: deviceInfo.localWidth,
                                   height: 60,

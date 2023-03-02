@@ -11,7 +11,7 @@ loginRes(String email, String pass) async {
       "password": pass,
     },
     encode: true,
-    myheadersres: myheaders,
+    myheadersres: Curd().myheaders,
   );
   return respons;
 }

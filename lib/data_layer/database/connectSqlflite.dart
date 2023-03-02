@@ -20,6 +20,7 @@ class SqlDb {
     String path = join(databasepath, 'ecommerce.db');
     Database mydb = await openDatabase(path,
         onCreate: _onCreate, version: 10, onUpgrade: _onUpgrade);
+    print(" oninit =====================================");
     return mydb;
   }
 
@@ -31,29 +32,23 @@ class SqlDb {
     // طريقة الباتش هتكون افضل طريقه تجعلك تضيف اكتر من جدول او تعمل اكتر من عمليه ف نفس الوقت
     Batch batch = db.batch();
 
-    batch.execute(
-        '''
-    CREATE TABLE favorite (
+    batch.execute('''
+    CREATE TABLE copon (
     "id" INTEGER  NOT NULL PRIMARY KEY  AUTOINCREMENT,
-    "isfavorit" INTEGER NULL,
-    "title" TEXT(500),
-    "image" TEXT(500),
-    "descr" TEXT(5000),
-    "price" TEXT(500)
+    "cop" TEXT(500),
+    "numb" TEXT(500)
 );
  ''');
-    batch.execute(
-        '''
-    CREATE TABLE cart (
-    "id" INTEGER  NOT NULL PRIMARY KEY  AUTOINCREMENT,
-    "itemsId" INTEGER NULL,
-    "itemsName" TEXT(255),
-    "itemsPrice" TEXT(255),
-    "itemsImage" TEXT(255),
-    "itemsDiscount" TEXT(255)
-);
- ''');
-    // print(" onCreate =====================================");
+    batch.execute('''
+     CREATE TABLE adress (
+    "user_id" INTEGER  NOT NULL PRIMARY KEY  AUTOINCREMENT,
+    "country" TEXT (255),
+    "city" TEXT(255),
+    "phone" TEXT(255),
+    "postal_code" TEXT(255)
+  );
+''');
+    print(" onCreate =====================================");
     batch.commit();
   }
 
@@ -120,6 +115,7 @@ class SqlDb {
     String databasepath = await getDatabasesPath();
     String path = join(databasepath, 'ecommerce.db');
     await deleteDatabase(path);
+    print('deletedatabese');
   }
 }
 ////لو عاوز اضيف بينات في الحقول اللي عندي 
@@ -146,18 +142,18 @@ class SqlDb {
 //اي حاجه ف البيانات دي بسهوله
 // List not = [];
 //   onPressed: () async {
-                    //   List<Map> responsev =
-                    //       await Sqldb.readData("SELECT * FROM notes");
-                    //   not.clear();
-                    //   not.addAll(responsev);
-                    //   print('notelength 1: ${not.length}');
-                    //   if (this.mounted) {
-                    //     print('notelength 2: ${not.length}');
-                    //     setState(() {});
-                    //   }
-                    //   print('notelength 3: ${not.length}');
-                    //   print('note : $not');
-                    //   print('respons : $responsev');
+                      // List<Map> responsev =
+                      //     await Sqldb.readData("SELECT * FROM notes");
+                      // not.clear();
+                      // not.addAll(responsev);
+                      // print('notelength 1: ${not.length}');
+                      // if (this.mounted) {
+                      //   print('notelength 2: ${not.length}');
+                      //   setState(() {});
+                      // }
+                      // print('notelength 3: ${not.length}');
+                      // print('note : $not');
+                      // print('respons : $responsev');
                     // },
 // }
 

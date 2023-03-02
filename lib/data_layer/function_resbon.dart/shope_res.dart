@@ -12,7 +12,8 @@ shopeRequestRespon(String name, String phone, String address) async {
       'phone': phone,
       'address': address,
     },
-    myheadersres: myheaders3,
+    encode: true,
+    myheadersres: Curd().myheaders2,
   );
   return respons;
 }
@@ -26,8 +27,24 @@ contactUsRespon(String name, String message, String email) async {
       'email': email,
       'message': message,
     },
-    myheadersres: myheaders2,
+    myheadersres: Curd().myheaders2,
     encode: true,
+  );
+  return respons;
+}
+
+editeShopeRespon(String name, String phone, String address, String fac) async {
+  Curd curd = Curd();
+  var respons = await curd.postrequest(
+    APiMange.editShope,
+    {
+      'name': name,
+      'phone': phone,
+      'facebook': fac,
+      'address': address,
+    },
+    encode: true,
+    myheadersres: Curd().myheaders2,
   );
   return respons;
 }

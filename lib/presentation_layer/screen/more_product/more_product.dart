@@ -34,65 +34,65 @@ class MoreProductScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                            SearchBar(kBackgroundColor: ColorManager.grey2),
-                            Align(
-                              alignment: Alignment.topRight,
+                          SearchBar(kBackgroundColor: ColorManager.grey2),
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text(
+                              'لوازم الحيوانات الأليفة',
+                              style: MangeStyles().getRegularStyle(
+                                color: ColorManager.kPrimary,
+                                fontSize: FontSize.s25,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Expanded(
+                            child: GridView.builder(
+                              controller: controller.controller,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10,
+                                childAspectRatio:
+                                    getChildAspectRatio(deviceInfo),
+                              ),
+                              itemCount: controller.productModels?.data!.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return ProductCard(
+                                  dataProduct:
+                                      controller.productModels?.data![index],
+                                );
+                              },
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          if (controller.isLoadMoreRunning == true)
+                            const Padding(
+                              padding: EdgeInsets.only(top: 10, bottom: 40),
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            ),
+                          if (controller.hasNextPage == false)
+                            Center(
                               child: Text(
-                                'لوازم الحيوانات الأليفة',
+                                'تم تجلب كل المنتجات',
                                 style: MangeStyles().getRegularStyle(
                                   color: ColorManager.kPrimary,
-                                  fontSize: FontSize.s25,
+                                  fontSize: FontSize.s20,
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Expanded(
-                              child: GridView.builder(
-                                controller: controller.controller,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10,
-                                  childAspectRatio:
-                                      getChildAspectRatio(deviceInfo),
-                                ),
-                                itemCount:
-                                    controller.productModels?.data!.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return ProductCard(
-                                    dataProduct:
-                                        controller.productModels?.data![index],
-                                  );
-                                },
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            if (controller.isLoadMoreRunning == true)
-                              const Padding(
-                                padding: EdgeInsets.only(top: 10, bottom: 40),
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
-                            if (controller.hasNextPage == false)
-                              Center(
-                                child: Text(
-                                  'تم تجلب كل المنتجات',
-                                  style: MangeStyles().getRegularStyle(
-                                    color: ColorManager.kPrimary,
-                                    fontSize: FontSize.s20,
-                                  ),
-                                ),
-                              ),
-                            SizedBox(
-                              height: 10,
-                            )
-                          ]);
+                          SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      );
               },
             ),
           );

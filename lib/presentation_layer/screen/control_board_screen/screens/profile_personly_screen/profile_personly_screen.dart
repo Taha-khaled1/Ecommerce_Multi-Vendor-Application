@@ -9,8 +9,13 @@ import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/customListtile.dart';
 
 class ProfilePersonlyScreen extends StatelessWidget {
-  const ProfilePersonlyScreen({super.key});
-
+  ProfilePersonlyScreen({super.key});
+  String phone = sharedPreferences.getString('phone') == 'null'
+      ? "لايوجد رقم هاتف"
+      : sharedPreferences.getString('phone')!;
+  String name = sharedPreferences.getString('name') == 'null'
+      ? "لايوجد رقم هاتف"
+      : sharedPreferences.getString('name')!;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,12 +36,19 @@ class ProfilePersonlyScreen extends StatelessWidget {
             ),
             Column(
               children: [
-                const CircleAvatar(
-                  radius: 70,
-                  backgroundImage: AssetImage('assets/images/Ellipse 1.png'),
-                ),
+                sharedPreferences.getString('avatar') == null ||
+                        sharedPreferences.getString('avatar') == 'null'
+                    ? CircleAvatar(
+                        radius: 70,
+                        backgroundImage: AssetImage('assets/icons/person.jpg'),
+                      )
+                    : CircleAvatar(
+                        radius: 70,
+                        backgroundImage: NetworkImage(
+                            '${sharedPreferences.getString('avatar')}'),
+                      ),
                 Text(
-                  sharedPreferences.getString('name')!,
+                  name,
                   style: MangeStyles().getBoldStyle(
                     color: ColorManager.kTextblack,
                     fontSize: FontSize.s25,
@@ -69,32 +81,50 @@ class ProfilePersonlyScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              children: List.generate(
-                3,
-                (index) => ListTile(
-                  isThreeLine: true,
-                  leading: SvgPicture.asset(
-                    listtileModel2[index].image,
-                    // color: Colors.white,
+            Column(children: [
+              ListTile(
+                isThreeLine: true,
+                leading: SvgPicture.asset(
+                  'assets/icons/phone-call-svgrepo-com (2).svg',
+                  // color: Colors.white,
+                ),
+                title: Text(
+                  'رقم الهاتف',
+                  style: MangeStyles().getBoldStyle(
+                    color: ColorManager.kTextblack,
+                    fontSize: FontSize.s20,
                   ),
-                  title: Text(
-                    listtileModel2[index].titel,
-                    style: MangeStyles().getBoldStyle(
-                      color: ColorManager.kTextblack,
-                      fontSize: FontSize.s20,
-                    ),
-                  ),
-                  subtitle: Text(
-                    listtileModel2[index].subtitel,
-                    style: MangeStyles().getBoldStyle(
-                      color: ColorManager.kTextlightgray,
-                      fontSize: FontSize.s18,
-                    ),
+                ),
+                subtitle: Text(
+                  phone,
+                  style: MangeStyles().getBoldStyle(
+                    color: ColorManager.kTextlightgray,
+                    fontSize: FontSize.s18,
                   ),
                 ),
               ),
-            ),
+              ListTile(
+                isThreeLine: true,
+                leading: SvgPicture.asset(
+                  'assets/icons/envelope2.svg',
+                  // color: Colors.white,
+                ),
+                title: Text(
+                  'البريد الإلكتروني',
+                  style: MangeStyles().getBoldStyle(
+                    color: ColorManager.kTextblack,
+                    fontSize: FontSize.s20,
+                  ),
+                ),
+                subtitle: Text(
+                  sharedPreferences.getString('email') ?? 'gmail',
+                  style: MangeStyles().getBoldStyle(
+                    color: ColorManager.kTextlightgray,
+                    fontSize: FontSize.s18,
+                  ),
+                ),
+              ),
+            ]),
             const SizedBox(
               height: 10,
             ),
@@ -119,21 +149,3 @@ class ListtileModel2 {
   ListtileModel2(
       {required this.titel, required this.subtitel, required this.image});
 }
-
-List<ListtileModel2> listtileModel2 = [
-  ListtileModel2(
-    titel: 'رقم الهاتف',
-    subtitel: sharedPreferences.getString('phone') ?? '011',
-    image: 'assets/icons/phone-call-svgrepo-com (2).svg',
-  ),
-  ListtileModel2(
-    titel: 'البريد الإلكتروني',
-    subtitel: sharedPreferences.getString('email') ?? 'gmail.com',
-    image: 'assets/icons/envelope2.svg',
-  ),
-  ListtileModel2(
-    titel: 'عنوان المنزل',
-    subtitel: 'Abudabhi 201,82299 ابوظبي',
-    image: 'assets/icons/home22.svg',
-  ),
-];

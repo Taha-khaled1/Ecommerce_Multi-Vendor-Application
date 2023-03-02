@@ -5,15 +5,12 @@ import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/Infowidget/ui_components/info_widget.dart';
 import 'package:pisti/presentation_layer/components/appbar1.dart';
 import 'package:pisti/presentation_layer/components/onlyrating.dart';
-import 'package:pisti/presentation_layer/handlingView/handlingview.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/msnge_api.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
-import 'package:pisti/presentation_layer/screen/authentication_screen/login_screen/login_controller/login_controller.dart';
 import 'package:pisti/presentation_layer/screen/favourite_screen/favourite_controller/favourite_controller.dart';
-import 'package:pisti/presentation_layer/screen/home_screen/widget/product_card.dart';
 import 'package:pisti/presentation_layer/screen/initialpage_screen/onboarding_screen/onboarding_screen.dart';
 import 'package:pisti/presentation_layer/screen/more_product/more_product.dart';
 

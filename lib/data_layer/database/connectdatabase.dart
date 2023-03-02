@@ -11,22 +11,21 @@ import 'package:pisti/main.dart';
 // headers: <String, String>{'Content-Type': 'application/json'},
 // String _basicAuth = 'Basic ${base64Encode(utf8.encode('wael:wael1'))}';
 
-Map<String, String> myheaders = {
-  'Content-Type': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-};
-Map<String, String> myheaders2 = {
-  'Content-Type': 'application/json',
-  'Authorization':
-      'Bearer ${sharedPreferences.getString('access_token').toString()}',
-};
-
-Map<String, String> myheaders3 = {
-  'Authorization':
-      'Bearer ${sharedPreferences.getString('access_token').toString()}',
-};
-
 class Curd {
+  Map<String, String> myheaders = {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+  };
+  Map<String, String> myheaders2 = {
+    'Content-Type': 'application/json',
+    'Authorization':
+        'Bearer ${sharedPreferences.getString('access_token').toString()}',
+  };
+
+  Map<String, String> myheaders3 = {
+    'Authorization':
+        'Bearer ${sharedPreferences.getString('access_token').toString()}',
+  };
   getrequest(String url) async {
     try {
       Response respos = await http.get(Uri.parse(url), headers: myheaders3);

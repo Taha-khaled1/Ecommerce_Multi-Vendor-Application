@@ -26,7 +26,7 @@ favoritRespon(int userId, int productId) async {
       'product_id': productId,
     },
     encode: true,
-    myheadersres: myheaders2,
+    myheadersres: Curd().myheaders2,
   );
   return respons;
 }

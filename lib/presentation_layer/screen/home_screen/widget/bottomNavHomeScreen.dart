@@ -3,8 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/widget/alerttoken.dart';
 
 class BottomNavHomeScreen extends StatelessWidget {
   const BottomNavHomeScreen({
@@ -44,7 +46,11 @@ class BottomNavHomeScreen extends StatelessWidget {
           ),
           IconButton(
             onPressed: (() {
-              Get.toNamed(Routes.chatScreen);
+              if (sharedPreferences.getString('access_token') != null) {
+                Get.toNamed(Routes.chatScreen);
+              } else {
+                aleartToken(context);
+              }
             }),
             icon: SvgPicture.asset(
               'assets/icons/envelope.svg',

@@ -14,9 +14,15 @@ class APiMange {
   static const String gteAddressuser = "$baseurl/user/shipping/address"; //id
   static const String getaddress = "$baseurl/user/shipping/address";
   static const String requestShope = "$baseurl/send-seller-request";
+  static const String editShope = "$baseurl/update-seller-data";
   static const String sendcontact = "$baseurl/send-contact";
+  static const String updatepro = "$baseurl/profile/update";
   // static const String products = "$baseurl/products/category";
   ///7?page=1
   // static const String forgotPasswordRoute = "/forgotPassword";
   // static const String resetPasswordRoute = "/resetPassword";
+
+//////////////////////////////////auth//////////////////////////////////////
+  static const String logout = "$baseurl/auth/logout";
+  //  static const String sendcontact = "$baseurl/send-contact";
 }

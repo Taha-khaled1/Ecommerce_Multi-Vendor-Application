@@ -57,7 +57,7 @@ class ControlBoardScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const AllListtileControllerBoard(),
+                AllListtileControllerBoard(controller: controller),
                 const SizedBox(
                   height: 15,
                 ),

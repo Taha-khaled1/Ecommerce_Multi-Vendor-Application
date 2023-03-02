@@ -89,7 +89,7 @@ List<GetPage<dynamic>>? getPage = [
   ),
   GetPage(
     name: Routes.profilePersonlyScreen,
-    page: () => const ProfilePersonlyScreen(),
+    page: () => ProfilePersonlyScreen(),
   ),
   GetPage(
     name: Routes.controlBoardRoute,
