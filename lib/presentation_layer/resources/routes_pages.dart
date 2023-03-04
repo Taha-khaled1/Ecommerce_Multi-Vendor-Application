@@ -5,7 +5,6 @@ import 'package:pisti/presentation_layer/screen/Shipping_info_screen/Shipping_in
 import 'package:pisti/presentation_layer/screen/address_screen/address_screen.dart';
 import 'package:pisti/presentation_layer/screen/authentication_screen/forgot_password_screen/forgot_password_screen.dart';
 import 'package:pisti/presentation_layer/screen/authentication_screen/login_screen/login_screen.dart';
-import 'package:pisti/presentation_layer/screen/authentication_screen/otp_screen/otp_screen.dart';
 import 'package:pisti/presentation_layer/screen/authentication_screen/reset_password_screen/reset_password_screen.dart';
 import 'package:pisti/presentation_layer/screen/authentication_screen/reset_password_screen/sucss_screen.dart';
 import 'package:pisti/presentation_layer/screen/authentication_screen/signup_screen/signup_screen.dart';
@@ -53,10 +52,6 @@ List<GetPage<dynamic>>? getPage = [
   GetPage(
     name: Routes.resetPasswordRoute,
     page: () => const ResetPasswordScreen(),
-  ),
-  GetPage(
-    name: Routes.otpRoute,
-    page: () => OtpScreen(),
   ),
   GetPage(
     name: Routes.sucssRoute,
