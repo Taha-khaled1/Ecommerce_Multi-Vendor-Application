@@ -70,3 +70,32 @@ saveOrderRespon(String user_id) async {
   );
   return respons;
 }
+
+addProductRes({
+  required String name,
+  required String weight,
+  required String height,
+  required String width,
+  required String photos,
+  required String unit_price,
+  required String description,
+}) async {
+  Curd curd = Curd();
+  var respons = await curd.postrequest(
+    APiMange.addproducts,
+    {
+      "name": "$name",
+      "weight": "$weight",
+      "height": "$height",
+      "width": "$width",
+      "photos": "$photos",
+      "unit_price": "$unit_price",
+      "description": "$description",
+      "category_id": "6",
+      "thumbnail_img": "551.55",
+    },
+    encode: true,
+    myheadersres: Curd().myheaders2,
+  );
+  return respons;
+}

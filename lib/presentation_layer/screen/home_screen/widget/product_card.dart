@@ -64,27 +64,26 @@ class ProductCard extends StatelessWidget {
                   child: GetBuilder<HomeController>(
                     builder: (controller) {
                       bool x = false;
-                      return HandlingDataView(
-                        statusRequest: controller.statusRequest,
-                        widget: CircleButton(
-                          size: 36,
-                          sizedsvg: 25,
-                          color1: ColorManager.white,
-                          onTap: () {
-                            x == true;
-                            sharedPreferences.getString('id') != null
-                                ? controller.addFavorit(
-                                    int.parse(sharedPreferences
-                                        .getString('id')
-                                        .toString()),
-                                    dataProduct!.id!)
-                                : customSnackBar('يجب تسجيل الدخول اولا');
-                          },
-                          iconData: 'assets/icons/heart.svg',
-                          color2: x == false
-                              ? ColorManager.kPrimary
-                              : ColorManager.error,
-                        ),
+                      return CircleButton(
+                        size: 36,
+                        sizedsvg: 25,
+                        color1: ColorManager.white,
+                        onTap: () {
+                          x == true;
+                          sharedPreferences.getString('id') != null
+                              ? controller.addFavorit(
+                                  int.parse(sharedPreferences
+                                      .getString('id')
+                                      .toString()),
+                                  dataProduct!.id!,
+                                  context,
+                                )
+                              : customSnackBar('يجب تسجيل الدخول اولا');
+                        },
+                        iconData: 'assets/icons/heart.svg',
+                        color2: x == false
+                            ? ColorManager.kPrimary
+                            : ColorManager.error,
                       );
                     },
                   ),

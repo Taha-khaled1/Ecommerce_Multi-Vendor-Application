@@ -22,6 +22,7 @@ class APiMange {
   // static const String forgotPasswordRoute = "/forgotPassword";
   // static const String resetPasswordRoute = "/resetPassword";
   static const String saveOrder = "$baseurl/order/store";
+  static const String addproducts = "$baseurl/seller/seller-products";
 //////////////////////////////////auth//////////////////////////////////////
   static const String logout = "$baseurl/auth/logout";
   static const String deletecart = "$baseurl/carts";

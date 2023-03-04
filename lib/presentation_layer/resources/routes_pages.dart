@@ -13,7 +13,6 @@ import 'package:pisti/presentation_layer/screen/cart_screen/cart_screen.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/control_board_screen.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/screens/add_product_screen/add_product_screen.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/screens/card_support_screen/card_support_screen.dart';
-import 'package:pisti/presentation_layer/screen/control_board_screen/screens/chat_screen/chat_screen.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/screens/coupon_screen/coupon_screen.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/screens/notification_list_screen/notification_list_screen.dart';
@@ -118,10 +117,6 @@ List<GetPage<dynamic>>? getPage = [
   GetPage(
     name: Routes.couponRoute,
     page: () => const CouponScreen(),
-  ),
-  GetPage(
-    name: Routes.chatScreen,
-    page: () => const ChatScreen(),
   ),
   GetPage(
     name: Routes.supportAccountScreen,

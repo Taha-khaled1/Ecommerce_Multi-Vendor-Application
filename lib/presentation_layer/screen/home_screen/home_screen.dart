@@ -26,17 +26,6 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: ColorManager.white,
         elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(right: 5),
-          child: sharedPreferences.getString('access_token') == 'null' ||
-                  sharedPreferences.getString('access_token') == null
-              ? SizedBox()
-              : CircleAvatar(
-                  backgroundColor: ColorManager.backgroundpersonalimage,
-                  backgroundImage:
-                      const AssetImage('assets/images/Rectangle 13.png'),
-                ),
-        ),
         actions: [
           Stack(
             children: [

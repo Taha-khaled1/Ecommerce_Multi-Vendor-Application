@@ -30,13 +30,6 @@ class AllListtileControllerBoard extends StatelessWidget {
           },
         ),
         CustomListtile(
-          image: 'assets/icons/Frame 17.svg',
-          titel: 'الطلبات',
-          onTap: () {
-            Get.toNamed(Routes.orderListScreen);
-          },
-        ),
-        CustomListtile(
           image: 'assets/icons/Frame 19.svg', //assets/icons/Frame 19.svg
           titel: 'قائمة الرغبات',
           onTap: () {

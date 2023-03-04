@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pisti/application_layer/ShardFunction/handling.dart';
 import 'package:pisti/application_layer/ShardFunction/statusrequst.dart';
@@ -5,6 +6,7 @@ import 'package:pisti/data_layer/function_resbon.dart/get_catogery.dart';
 import 'package:pisti/data_layer/function_resbon.dart/get_product_home.dart';
 import 'package:pisti/domain_layer/models/catogery_models.dart';
 import 'package:pisti/domain_layer/models/product_models.dart';
+import 'package:pisti/presentation_layer/components/show_dialog.dart';
 import 'package:pisti/presentation_layer/screen/authentication_screen/login_screen/login_controller/login_controller.dart';
 
 class HomeController extends GetxController {
@@ -55,7 +57,7 @@ class HomeController extends GetxController {
   }
 
   StatusRequest statusRequest = StatusRequest.none;
-  addFavorit(int userId, int productId) async {
+  addFavorit(int userId, int productId, BuildContext context) async {
     statusRequest = StatusRequest.loading;
     update();
     var respon = await favoritRespon(userId, productId);
@@ -63,7 +65,7 @@ class HomeController extends GetxController {
     try {
       if (StatusRequest.success == statusRequest) {
         statusRequest = StatusRequest.none;
-        customSnackBar(respon['message']);
+        showDilog(context, 'تم اضافة الي المفضلات بنجاح');
       } else {
         customSnackBar('الحساب غير موجود');
       }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({
@@ -17,9 +20,17 @@ class SearchBar extends StatelessWidget {
           filled: true,
           fillColor: kBackgroundColor,
           hintText: 'ابحث عن منتجك...',
-          prefixIcon: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SvgPicture.asset('assets/icons/Frame 3.svg')),
+          prefixIcon: InkWell(
+            onTap: () {
+              Get.toNamed(
+                Routes.moreproduct,
+                arguments: [15],
+              );
+            },
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset('assets/icons/Frame 3.svg')),
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,

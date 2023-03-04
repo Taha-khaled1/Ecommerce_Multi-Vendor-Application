@@ -38,26 +38,15 @@ class BottomNavHomeScreen extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: (() {}),
-            icon: SvgPicture.asset(
-              'assets/icons/search.svg',
-              color: ColorManager.navbar,
-            ),
-          ),
-          IconButton(
-            onPressed: (() {
-              if (sharedPreferences.getString('access_token') == 'null' ||
-                  sharedPreferences.getString('access_token') == null) {
-                aleartToken(context);
-              } else {
-                Get.toNamed(Routes.chatScreen);
-              }
-            }),
-            icon: SvgPicture.asset(
-              'assets/icons/envelope.svg',
-              color: ColorManager.navbar,
-            ),
-          ),
+              onPressed: (() {
+                if (sharedPreferences.getString('access_token') == 'null' ||
+                    sharedPreferences.getString('access_token') == null) {
+                  aleartToken(context);
+                } else {
+                  Get.toNamed(Routes.favouriteScreen);
+                }
+              }),
+              icon: Icon(Icons.favorite_border_outlined, color: Colors.grey)),
           IconButton(
             onPressed: (() {
               if (sharedPreferences.getString('access_token') == 'null' ||

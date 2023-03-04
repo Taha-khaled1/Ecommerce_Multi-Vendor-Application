@@ -35,7 +35,10 @@ class CustomAppBarControllerProfile extends StatelessWidget {
               child: ListTile(
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(25),
-                  child: Image.asset('assets/images/Rectangle 13.png'),
+                  child: sharedPreferences.getString('avatar') == null ||
+                          sharedPreferences.getString('avatar') == 'null'
+                      ? Image.asset('assets/icons/person.jpg')
+                      : Image.network(sharedPreferences.getString('avatar')!),
                 ),
                 title: Text(
                   sharedPreferences.getString('name') ?? 'name',
@@ -54,16 +57,6 @@ class CustomAppBarControllerProfile extends StatelessWidget {
                         fontSize: FontSize.s18,
                       )
                       .copyWith(height: 0.4),
-                ),
-                trailing: IconButton(
-                  onPressed: () {
-                    Get.toNamed(Routes.notificationlistRoute);
-                  },
-                  icon: Icon(
-                    Icons.notifications_none_outlined,
-                    size: 30,
-                    color: ColorManager.grey2,
-                  ),
                 ),
               ),
             ),

@@ -34,7 +34,6 @@ class MoreProductScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SearchBar(kBackgroundColor: ColorManager.grey2),
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
