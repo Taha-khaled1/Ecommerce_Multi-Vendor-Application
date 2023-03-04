@@ -46,6 +46,34 @@ class Curd {
     }
   }
 
+  deleterequest(String url, Map data,
+      {bool? encode, Map<String, String>? myheadersres}) async {
+    try {
+      if (await checkInternet()) {
+        Response respos = await http.delete(
+          Uri.parse(url),
+          body: encode == true ? jsonEncode(data) : data,
+          headers: myheadersres,
+        );
+        print(respos.body);
+        print(respos.statusCode);
+        if (respos.statusCode == 200 || respos.statusCode == 201) {
+          dynamic body = jsonDecode(respos.body);
+          return body;
+        } else {
+          print('serverfailure');
+          return StatusRequest.none;
+        }
+      } else {
+        print('offline');
+        return StatusRequest.offlinefailure;
+      }
+    } catch (e) {
+      print('Catch : $e');
+      return StatusRequest.serverfailure;
+    }
+  }
+
   postrequest(String url, Map data,
       {bool? encode, Map<String, String>? myheadersres}) async {
     try {

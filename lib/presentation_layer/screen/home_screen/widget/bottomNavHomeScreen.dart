@@ -46,10 +46,11 @@ class BottomNavHomeScreen extends StatelessWidget {
           ),
           IconButton(
             onPressed: (() {
-              if (sharedPreferences.getString('access_token') != null) {
-                Get.toNamed(Routes.chatScreen);
-              } else {
+              if (sharedPreferences.getString('access_token') == 'null' ||
+                  sharedPreferences.getString('access_token') == null) {
                 aleartToken(context);
+              } else {
+                Get.toNamed(Routes.chatScreen);
               }
             }),
             icon: SvgPicture.asset(
@@ -59,7 +60,12 @@ class BottomNavHomeScreen extends StatelessWidget {
           ),
           IconButton(
             onPressed: (() {
-              Get.toNamed(Routes.controlBoardRoute);
+              if (sharedPreferences.getString('access_token') == 'null' ||
+                  sharedPreferences.getString('access_token') == null) {
+                aleartToken(context);
+              } else {
+                Get.toNamed(Routes.controlBoardRoute);
+              }
             }),
             icon: SvgPicture.asset(
               'assets/icons/user.svg',

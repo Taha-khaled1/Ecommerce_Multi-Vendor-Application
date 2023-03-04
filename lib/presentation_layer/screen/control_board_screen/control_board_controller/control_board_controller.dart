@@ -115,4 +115,16 @@ class ControlBoardController extends GetxController {
 
     update();
   }
+
+  late bool x;
+  @override
+  void onInit() {
+    if (sharedPreferences.getString('type') == 'seller') {
+      x = true;
+    } else {
+      x = false;
+    }
+
+    super.onInit();
+  }
 }

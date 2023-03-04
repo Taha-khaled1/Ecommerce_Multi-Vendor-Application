@@ -23,7 +23,10 @@ class ControlBoardScreen extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               children: [
-                CustomAppBarControllerProfile(deviceInfo: deviceInfo),
+                CustomAppBarControllerProfile(
+                  deviceInfo: deviceInfo,
+                  x: controller.x,
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -57,7 +60,10 @@ class ControlBoardScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                AllListtileControllerBoard(controller: controller),
+                AllListtileControllerBoard(
+                  controller: controller,
+                  torf: controller.x,
+                ),
                 const SizedBox(
                   height: 15,
                 ),

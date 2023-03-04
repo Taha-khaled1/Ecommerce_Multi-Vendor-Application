@@ -20,6 +20,7 @@ class CartCard extends StatelessWidget {
   final int? index;
   @override
   Widget build(BuildContext context) {
+    CartController cartController = Get.put(CartController());
     return Padding(
       padding: const EdgeInsets.only(bottom: 13),
       child: Row(
@@ -117,7 +118,9 @@ class CartCard extends StatelessWidget {
           ),
           const Expanded(child: SizedBox()),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              cartController.deletecarts(context, cart!.id ?? 1);
+            },
             icon: SvgPicture.asset('assets/icons/trash.svg'),
           )
         ],

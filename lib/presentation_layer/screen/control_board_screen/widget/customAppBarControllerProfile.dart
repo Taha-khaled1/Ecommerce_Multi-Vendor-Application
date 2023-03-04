@@ -13,8 +13,10 @@ class CustomAppBarControllerProfile extends StatelessWidget {
   const CustomAppBarControllerProfile({
     Key? key,
     required this.deviceInfo,
+    required this.x,
   }) : super(key: key);
   final DeviceInfo deviceInfo;
+  final bool x;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -92,7 +94,7 @@ class CustomAppBarControllerProfile extends StatelessWidget {
                     fontSize: FontSize.s18,
                   ),
                 ),
-                value: true,
+                value: x,
                 onChanged: (value) {},
               ),
             ),

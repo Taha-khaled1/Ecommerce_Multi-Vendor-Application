@@ -6,6 +6,7 @@ import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
+import 'package:pisti/presentation_layer/screen/control_board_screen/control_board_controller/control_board_controller.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/customListtile.dart';
 
 class ProfilePersonlyScreen extends StatelessWidget {
@@ -18,6 +19,7 @@ class ProfilePersonlyScreen extends StatelessWidget {
       : sharedPreferences.getString('name')!;
   @override
   Widget build(BuildContext context) {
+    ControlBoardController controller = Get.put(ControlBoardController());
     return Scaffold(
       backgroundColor: ColorManager.white,
       body: Padding(
@@ -133,7 +135,9 @@ class ProfilePersonlyScreen extends StatelessWidget {
             ),
             CustomListtile(
               image: 'assets/icons/log-out.svg',
-              onTap: () {},
+              onTap: () {
+                controller.logOut(context);
+              },
               titel: 'تسجيل خروج',
             )
           ],

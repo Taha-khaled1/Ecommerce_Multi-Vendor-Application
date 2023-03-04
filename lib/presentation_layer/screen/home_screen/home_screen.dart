@@ -5,6 +5,7 @@ import 'package:pisti/presentation_layer/Infowidget/ui_components/info_widget.da
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/home_controller/home_controller.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/widget/alerttoken.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/widget/bottomNavHomeScreen.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/widget/catogery_card.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/widget/product_card.dart';
@@ -27,17 +28,26 @@ class HomeScreen extends StatelessWidget {
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.only(right: 5),
-          child: CircleAvatar(
-            backgroundColor: ColorManager.backgroundpersonalimage,
-            backgroundImage: const AssetImage('assets/images/Rectangle 13.png'),
-          ),
+          child: sharedPreferences.getString('access_token') == 'null' ||
+                  sharedPreferences.getString('access_token') == null
+              ? SizedBox()
+              : CircleAvatar(
+                  backgroundColor: ColorManager.backgroundpersonalimage,
+                  backgroundImage:
+                      const AssetImage('assets/images/Rectangle 13.png'),
+                ),
         ),
         actions: [
           Stack(
             children: [
               CircleButton(
                 onTap: () {
-                  Get.toNamed(Routes.cart);
+                  if (sharedPreferences.getString('access_token') == 'null' ||
+                      sharedPreferences.getString('access_token') == null) {
+                    aleartToken(context);
+                  } else {
+                    Get.toNamed(Routes.cart);
+                  }
                 },
                 iconData: 'assets/icons/shopping-basket.svg',
                 color1: ColorManager.grey2,

@@ -207,37 +207,23 @@ class ProductDetalisScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                TextButton(
-                                  onPressed: () {},
-                                  child: Text(
-                                    'أضف الى قائمة الامنيات',
-                                    style: MangeStyles().getBoldStyle(
-                                      color: ColorManager.kPrimary,
-                                      fontSize: FontSize.s14,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15),
-                                  child: TextButton(
-                                    onPressed: () {
-                                      showDilog(
-                                          context, 'تم الاضافه الي المقارنات');
-                                    },
-                                    child: Text(
-                                      'أضف للمقارنة',
-                                      style: MangeStyles().getBoldStyle(
-                                        color: ColorManager.kPrimary,
-                                        fontSize: FontSize.s14,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            Align(
+                              alignment: Alignment.center,
+                              child: CustomButton(
+                                width: 150,
+                                rectangel: 10,
+                                haigh: 47,
+                                fontSize: 18,
+                                color: ColorManager.white,
+                                colorText: ColorManager.kPrimary,
+                                sideIs:
+                                    BorderSide(color: ColorManager.kPrimary),
+                                text: 'أضف للمقارنة',
+                                press: () {
+                                  showDilog(
+                                      context, 'تم الاضافه الي المقارنات');
+                                },
+                              ),
                             ),
                           ],
                         ),

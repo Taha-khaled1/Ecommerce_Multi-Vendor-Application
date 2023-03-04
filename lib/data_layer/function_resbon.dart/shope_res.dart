@@ -48,3 +48,25 @@ editeShopeRespon(String name, String phone, String address, String fac) async {
   );
   return respons;
 }
+
+deleteFromCartRespon(int id) async {
+  Curd curd = Curd();
+  var respons = await curd.deleterequest(
+    '${APiMange.deletecart}/$id',
+    {},
+    encode: true,
+    myheadersres: Curd().myheaders2,
+  );
+  return respons;
+}
+
+saveOrderRespon(String user_id) async {
+  Curd curd = Curd();
+  var respons = await curd.postrequest(
+    APiMange.saveOrder,
+    {"user_id": "$user_id"},
+    encode: true,
+    myheadersres: Curd().myheaders2,
+  );
+  return respons;
+}

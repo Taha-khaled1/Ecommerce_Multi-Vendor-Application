@@ -14,8 +14,10 @@ class AllListtileControllerBoard extends StatelessWidget {
   const AllListtileControllerBoard({
     Key? key,
     required this.controller,
+    required this.torf,
   }) : super(key: key);
   final ControlBoardController controller;
+  final bool torf;
   @override
   Widget build(BuildContext context) {
     return Column(

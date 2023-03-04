@@ -15,6 +15,8 @@ import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/resources/values_manager.dart';
+import 'package:pisti/presentation_layer/screen/control_board_screen/screens/edit_profile_screen/controller/edit_profile_controller.dart';
+import 'package:pisti/presentation_layer/screen/control_board_screen/widget/customListtile.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -57,27 +59,50 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     Align(
                       alignment: Alignment.topRight,
-                      child: CircleAvatar(
-                        radius: 70,
-                        backgroundImage:
-                            const AssetImage('assets/images/Ellipse 1.png'),
-                        child: Transform.translate(
-                          offset: const Offset(40, 50),
-                          child: InkWell(
-                            onTap: () {},
-                            child: Container(
-                              alignment: Alignment.center,
-                              width: 36,
-                              height: 36,
-                              decoration: BoxDecoration(
-                                color: Colors.blue,
-                                borderRadius: BorderRadius.circular(30),
+                      child: sharedPreferences.getString('avatar') == null ||
+                              sharedPreferences.getString('avatar') == 'null'
+                          ? CircleAvatar(
+                              radius: 70,
+                              backgroundImage:
+                                  AssetImage('assets/icons/person.jpg'),
+                              child: Transform.translate(
+                                offset: const Offset(40, 50),
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: 36,
+                                    height: 36,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: const Icon(Icons.edit_outlined),
+                                  ),
+                                ),
                               ),
-                              child: const Icon(Icons.edit_outlined),
+                            )
+                          : CircleAvatar(
+                              radius: 70,
+                              backgroundImage: NetworkImage(
+                                  '${sharedPreferences.getString('avatar')}'),
+                              child: Transform.translate(
+                                offset: const Offset(40, 50),
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: 36,
+                                    height: 36,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    child: const Icon(Icons.edit_outlined),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
                     ),
                     const Divider(
                       thickness: 1.2,
@@ -131,7 +156,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         fontSize: FontSize.s20,
                       ),
                     ),
-                    const Editpay(),
+                    Editpay(size: 1),
                     const SizedBox(height: 10),
                     Text(
                       'عنوان المنزل',
@@ -207,39 +232,98 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
 class Editpay extends StatelessWidget {
   const Editpay({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+    required this.size,
+  });
+  final double size;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 5),
-      child: Row(
-        children: [
-          Image.asset('assets/images/payedit.png'),
-          const SizedBox(
-            width: 15,
-          ),
-          Text(
-            'Stc Pay',
-            style: MangeStyles().getBoldStyle(
-              color: ColorManager.kTextblack,
-              fontSize: FontSize.s22,
+    return GetBuilder<EditProfileController>(
+      init: EditProfileController(),
+      builder: (controller) {
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: size),
+          child: Container(
+            child: Row(
+              children: [
+                Image.asset(
+                  'assets/icons/credit-card.png',
+                  width: 55,
+                  height: 45,
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  controller.pay,
+                  style: MangeStyles().getBoldStyle(
+                    color: ColorManager.kTextblack,
+                    fontSize: FontSize.s22,
+                  ),
+                ),
+                const Expanded(child: SizedBox()),
+                TextButton(
+                  onPressed: () {
+                    handleAttachmentPressed(context, controller);
+                  },
+                  child: Text(
+                    'تعديل',
+                    style: MangeStyles().getBoldStyle(
+                      color: ColorManager.kPrimary,
+                      fontSize: FontSize.s18,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          const Expanded(child: SizedBox()),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              'تعديل',
-              style: MangeStyles().getBoldStyle(
-                color: ColorManager.ktextlabny,
-                fontSize: FontSize.s18,
-              ),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
+}
+
+String x = '';
+void handleAttachmentPressed(
+    BuildContext context, EditProfileController controller) {
+  showModalBottomSheet<void>(
+    context: context,
+    builder: (BuildContext context) => SafeArea(
+      child: SizedBox(
+        height: 250,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            CustomListtile(
+              // color: ColorManager.ktextblackk,
+              widget: Image.asset('assets/icons/bank.png'),
+              onTap: () async {
+                controller.changepay('تحويل بنكي');
+              },
+              titel: 'تحويل بنكي',
+            ),
+            CustomListtile(
+              widget: Image.asset('assets/icons/visa.png'),
+              onTap: () {
+                controller.changepay('فيزا كارد');
+              },
+              titel: 'فيزا كارد',
+            ),
+            CustomListtile(
+              widget: const Icon(
+                Icons.attach_money,
+                textDirection: TextDirection.rtl,
+              ),
+              onTap: () {
+                controller.changepay('تحويل رقمي');
+              },
+              titel: 'تحويل رقمي',
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }

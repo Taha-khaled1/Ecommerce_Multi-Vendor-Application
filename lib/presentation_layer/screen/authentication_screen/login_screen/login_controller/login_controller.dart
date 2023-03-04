@@ -40,6 +40,10 @@ class LoginController extends GetxController {
                 'name', respon['user']['name'].toString());
             sharedPreferences.setString(
                 'avatar', respon['user']['avatar'].toString());
+
+            sharedPreferences.setString(
+                'type', respon['user']['type'].toString());
+
             sharedPreferences.setString(
                 'email', respon['user']['email'].toString());
             sharedPreferences.setString(

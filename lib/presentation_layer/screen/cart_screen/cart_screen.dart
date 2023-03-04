@@ -4,6 +4,7 @@ import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/Infowidget/ui_components/info_widget.dart';
 import 'package:pisti/presentation_layer/components/appbar1.dart';
 import 'package:pisti/presentation_layer/components/navbar.dart';
+import 'package:pisti/presentation_layer/handlingView/handlingview.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
@@ -24,13 +25,19 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: appbar(),
-      bottomNavigationBar: BottomNavAuth(
-        press: () {
-          xtemp == false
-              ? Get.toNamed(Routes.shippingInfoRoute, arguments: {'cart': true})
-              : Get.toNamed(Routes.sucssRoute);
+      bottomNavigationBar: GetBuilder<CartController>(
+        builder: (controller) {
+          return HandlingDataView(
+            statusRequest: controller.statusRequest1,
+            widget: BottomNavAuth(
+              press: () {
+                controller.saveOrder(
+                    context, '${sharedPreferences.getString('id')}}');
+              },
+              text: 'تاكيد الطلب',
+            ),
+          );
         },
-        text: 'تابع للشحن',
       ),
       body: InfoWidget(
         builder: (context, deviceInfo) {
@@ -53,15 +60,20 @@ class CartScreen extends StatelessWidget {
                     } else if (snapshot.hasData) {
                       // Extracting data from snapshot object
 
-                      return Expanded(
-                        child: ListView.builder(
-                          itemCount: controller.carModelsdemo.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return CartCard(
-                              cart: controller.carModelsdemo[index],
-                            );
-                          },
-                        ),
+                      return GetBuilder<CartController>(
+                        init: CartController(),
+                        builder: (controller) {
+                          return Expanded(
+                            child: ListView.builder(
+                              itemCount: controller.carModelsdemo.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return CartCard(
+                                  cart: controller.carModelsdemo[index],
+                                );
+                              },
+                            ),
+                          );
+                        },
                       );
                     }
                   }
@@ -87,68 +99,74 @@ class CartScreen extends StatelessWidget {
                     const Divider(
                       thickness: 2,
                     ),
-                    xtemp == false
-                        ? GetBuilder<CartController>(
-                            builder: (controller) {
-                              return Column(
-                                children: [
-                                  FinalPrice(
-                                    title: 'المجموع الفرعي',
-                                    price: controller.totelPrice.toString(),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  FinalPrice(
-                                    title: 'ضريبة',
-                                    price: controller.totelTex.toString(),
-                                  ),
-                                ],
-                              );
-                            },
-                          )
-                        : Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                'اختر نوع التسليم',
-                                style: MangeStyles().getBoldStyle(
-                                  color: ColorManager.kPrimary,
-                                  fontSize: FontSize.s20,
+                    GetBuilder<CartController>(
+                      builder: (controller) {
+                        return Column(
+                          children: [
+                            FinalPrice(
+                              title: 'المجموع الفرعي',
+                              price: controller.totelPrice.toString(),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            FinalPrice(
+                              title: 'ضريبة',
+                              price: controller.totelTex.toString(),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 10,
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                height: 75,
-                                width: deviceInfo.localWidth * 0.85,
-                                alignment: Alignment.centerRight,
-                                decoration: BoxDecoration(
-                                  color: ColorManager.grey2,
-                                  borderRadius: BorderRadius.circular(20),
-                                  border:
-                                      Border.all(color: ColorManager.kPrimary),
-                                ),
-                                child: RadioListTile(
-                                  title: Text(
-                                    'توصيل منزلي',
-                                    style: MangeStyles().getBoldStyle(
-                                      color: ColorManager.kTextblack,
-                                      fontSize: FontSize.s18,
-                                    ),
+                                Text(
+                                  'اختر نوع التسليم',
+                                  style: MangeStyles().getBoldStyle(
+                                    color: ColorManager.kPrimary,
+                                    fontSize: FontSize.s20,
                                   ),
-                                  value: ctemp,
-                                  groupValue: 'g',
-                                  onChanged: (value) {},
                                 ),
-                              ),
-                            ],
-                          ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  height: 75,
+                                  width: deviceInfo.localWidth * 0.85,
+                                  alignment: Alignment.centerRight,
+                                  decoration: BoxDecoration(
+                                    color: ColorManager.grey2,
+                                    borderRadius: BorderRadius.circular(20),
+                                    border: Border.all(
+                                        color: ColorManager.kPrimary),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Radio(
+                                        value: true,
+                                        groupValue: true,
+                                        onChanged: (value) {},
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        'توصيل منزلي',
+                                        style: MangeStyles().getBoldStyle(
+                                          color: ColorManager.kTextblack,
+                                          fontSize: FontSize.s18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                     const SizedBox(
                       height: 15,
                     ),

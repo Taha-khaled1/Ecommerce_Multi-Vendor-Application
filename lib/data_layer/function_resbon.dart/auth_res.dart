@@ -69,42 +69,40 @@ LogOutRes() async {
 //   return respons;
 // }
 
-// RegisterResponse({
-//   required String email,
-//   required String password,
-//   required String country,
-//   required String name,
-//   required String phone,
-// }) async {
-//   print(country);
-//   Curd curd = Curd();
-//   var respons = await curd.postrequest(
-//     APiMange.register,
-//     {
-//       "email": email,
-//       "password": password,
-//       "name": name,
-//       "country": country,
-//       "phone": phone
-//     },
-//     encode: true,
-//     myheadersres: Curd().myheaders2,
-//   );
-//   return respons;
-// }
+RegisterResponse({
+  required String email,
+  required String password,
+  required String name,
+  required String phone,
+}) async {
+  Curd curd = Curd();
+  var respons = await curd.postrequest(
+    APiMange.signup,
+    {
+      "name": name,
+      "email_or_phone": email,
+      "password": phone,
+      "passowrd_confirmation": password,
+      "register_by": "email"
+    },
+    encode: true,
+    myheadersres: Curd().myheaders2,
+  );
+  return respons;
+}
 
-// forgetPassResponse(email) async {
-//   Curd curd = Curd();
-//   var respons = await curd.postrequest(
-//     APiMange.forgotPassword,
-//     {
-//       "email": email,
-//     },
-//     encode: true,
-//     myheadersres: Curd().myheaders2,
-//   );
-//   return respons;
-// }
+forgetPassResponse(email) async {
+  Curd curd = Curd();
+  var respons = await curd.postrequest(
+    APiMange.forget_request,
+    {
+      "email": email,
+    },
+    encode: true,
+    myheadersres: Curd().myheaders2,
+  );
+  return respons;
+}
 
 // verfayforgetPassResponse(email, otp) async {
 //   Curd curd = Curd();
@@ -120,17 +118,13 @@ LogOutRes() async {
 //   return respons;
 // }
 
-// resetPassResponse(email, otp, pass) async {
-//   Curd curd = Curd();
-//   var respons = await curd.postrequest(
-//     APiMange.resetPass,
-//     {
-//       "otp": otp,
-//       "password": pass,
-//       "email": email,
-//     },
-//     encode: true,
-//     myheadersres: Curd().myheaders2,
-//   );
-//   return respons;
-// }
+resetPassResponse(otp, pass) async {
+  Curd curd = Curd();
+  var respons = await curd.postrequest(
+    APiMange.reset,
+    {"verification_code": otp, "password": pass},
+    encode: true,
+    myheadersres: Curd().myheaders2,
+  );
+  return respons;
+}
