@@ -94,7 +94,7 @@ class ProductDetalisScreen extends StatelessWidget {
                                 fontSize: FontSize.s16,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 15),
                             RichText(
                               text: TextSpan(
                                 text: 'تم بيعها من قبل :',
@@ -114,42 +114,48 @@ class ProductDetalisScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 5),
+                            SizedBox(height: 10),
                             OnlyRating(
                               nmuberstar: controller
                                       .productDetalisModels?.data![0].rating ??
                                   0,
                             ),
-                            SizedBox(height: 8),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                GetBuilder<ProductDetalisController>(
-                                  builder: (controller) {
-                                    return IncrasingorDecrasing(
-                                      fontsize: AppSize.s32,
-                                      size: 40,
-                                      count: controller.count,
-                                      onTapAdd: () {
-                                        controller.icrasingCount();
-                                      },
-                                      onTapmuns: () {
-                                        controller.decrasingCount();
-                                      },
-                                    );
-                                  },
-                                ),
-                                Text(
-                                  controller.productDetalisModels?.data![0]
-                                          .mainPrice ??
-                                      'AED 000',
-                                  style: MangeStyles().getBoldStyle(
-                                    color: ColorManager.kPrimary,
-                                    fontSize: FontSize.s25,
+                            SizedBox(height: 10),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GetBuilder<ProductDetalisController>(
+                                    builder: (controller) {
+                                      return IncrasingorDecrasing(
+                                        fontsize: AppSize.s32,
+                                        size: 40,
+                                        count: controller.count,
+                                        onTapAdd: () {
+                                          controller.icrasingCount();
+                                        },
+                                        onTapmuns: () {
+                                          controller.decrasingCount();
+                                        },
+                                      );
+                                    },
                                   ),
-                                ),
-                              ],
+                                  Text(
+                                    controller.productDetalisModels?.data![0]
+                                            .mainPrice ??
+                                        'AED 000',
+                                    style: MangeStyles().getBoldStyle(
+                                      color: ColorManager.kPrimary,
+                                      fontSize: FontSize.s25,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
+                            SizedBox(height: 10),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -183,6 +189,7 @@ class ProductDetalisScreen extends StatelessWidget {
                                     }
                                   },
                                 ),
+                                SizedBox(height: 15),
                                 CustomButton(
                                   width: 150,
                                   rectangel: 10,
@@ -217,7 +224,7 @@ class ProductDetalisScreen extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              height: 12,
+                              height: 16,
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -277,9 +284,11 @@ class ProductDetalisScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 12,
+                        height: 15,
                       ),
-                      Divider(),
+                      Divider(
+                        color: Colors.grey,
+                      ),
                       SizedBox(
                         height: 12,
                       ),

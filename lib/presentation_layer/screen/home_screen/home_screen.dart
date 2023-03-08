@@ -37,32 +37,6 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: ColorManager.white,
         elevation: 0,
-        actions: [
-          Stack(
-            children: [
-              CircleButton(
-                onTap: () {
-                  if (sharedPreferences.getString('access_token') == 'null' ||
-                      sharedPreferences.getString('access_token') == null) {
-                    aleartToken(context);
-                  } else {
-                    Get.toNamed(Routes.cart);
-                  }
-                },
-                iconData: 'assets/icons/shopping-basket.svg',
-                color1: ColorManager.grey2,
-              ),
-              Positioned(
-                top: 10,
-                right: 20,
-                child: CircleAvatar(
-                  radius: 4.2,
-                  backgroundColor: ColorManager.error,
-                ),
-              )
-            ],
-          )
-        ],
       ),
       body: SizedBox(
         width: double.infinity,
@@ -108,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                       statusRequest: controller.statusRequest1,
                       widget: Container(
                         alignment: Alignment.center,
-                        height: 220,
+                        height: 240,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.catogeryModels?.data?.length,
