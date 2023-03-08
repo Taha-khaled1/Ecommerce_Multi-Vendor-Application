@@ -226,7 +226,10 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(
                   height: 20,
-                )
+                ),
+                SizedBox(
+                  height: 40,
+                ),
               ],
             );
           },
@@ -394,7 +397,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           rightCornerRadius: 32,
           onTap: (index) {
             if (sharedPreferences.getString('access_token') == 'null' ||
-                sharedPreferences.getString('access_token') == null) {
+                sharedPreferences.getString('access_token') == null &&
+                    index != 0) {
               aleartToken(context);
             } else {
               setState(() => _bottomNavIndex = index);

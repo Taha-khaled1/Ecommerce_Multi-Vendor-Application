@@ -11,8 +11,6 @@ void main() async {
   sharedPreferences = await SharedPreferences.getInstance();
   sqlDb = SqlDb();
   runApp(
-    DevicePreview(builder: (context) {
-      return const MyApp();
-    }), // Wrap your app
+    const MyApp(),
   );
 }
