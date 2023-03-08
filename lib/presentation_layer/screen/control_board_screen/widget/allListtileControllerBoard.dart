@@ -6,6 +6,7 @@ import 'package:pisti/presentation_layer/handlingView/handlingview.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/control_board_controller/control_board_controller.dart';
+import 'package:pisti/presentation_layer/screen/control_board_screen/screens/chat_screen/notification_list_controller.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/customListtile.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/shope_settinges.dart';
 import 'package:quickalert/quickalert.dart';
@@ -34,6 +35,13 @@ class AllListtileControllerBoard extends StatelessWidget {
           titel: 'قائمة الرغبات',
           onTap: () {
             Get.toNamed(Routes.favouriteScreen);
+          },
+        ),
+        CustomListtile(
+          image: 'assets/icons/Frame 19.svg', //assets/icons/Frame 19.svg
+          titel: 'المحادثات',
+          onTap: () {
+            Get.to(() => ChateScreen());
           },
         ),
         Column(

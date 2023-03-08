@@ -52,7 +52,7 @@ class ControlBoardController extends GetxController {
         statusRequest1 = StatusRequest.none;
         await sharedPreferences.remove('access_token');
 
-        Get.offAll(() => HomeScreen());
+        Get.offAll(() => MyHomePage(title: 'title'));
         showDilog(context, 'تم تسجيل الخروج بنجاح');
       } else {
         statusRequest1 = StatusRequest.serverfailure;
