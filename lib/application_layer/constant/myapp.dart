@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pisti/presentation_layer/resources/routes_pages.dart';
 import 'package:pisti/presentation_layer/resources/theme_manager.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: getApplicationTheme(),
       getPages: getPage,
+      home: MyHomePage(title: 'title'),
     );
   }
 }

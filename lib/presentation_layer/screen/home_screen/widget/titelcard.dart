@@ -25,12 +25,13 @@ class TitelCard extends StatelessWidget {
               fontSize: FontSize.s20,
             ),
           ),
-          InkWell(
-            onTap: onTap,
+          MaterialButton(
+            color: ColorManager.kPrimary,
+            onPressed: onTap,
             child: Text(
               'المزيد',
               style: MangeStyles().getRegularStyle(
-                color: ColorManager.kPrimary,
+                color: ColorManager.white,
                 fontSize: FontSize.s14,
               ),
             ),

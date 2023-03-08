@@ -51,6 +51,7 @@ dependencies:
   path_provider: ^2.0.11
   country_picker: ^2.0.18
   quickalert: ^1.0.1
+  animated_bottom_navigation_bar: ^1.1.0+1
 
 
 

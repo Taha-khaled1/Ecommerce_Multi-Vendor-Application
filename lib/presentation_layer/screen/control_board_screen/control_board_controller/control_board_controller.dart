@@ -15,15 +15,30 @@ class ControlBoardController extends GetxController {
   late String name, phone, address;
   final GlobalKey<FormState> formkeysigin = GlobalKey();
   CountersModels? countersModels;
-  getCounters(int idCato) async {
+
+  late StatusRequest statusRequest7;
+  getAllCounters() async {
     try {
-      var response = await getAllCountersRes(idCato);
-      countersModels = await CountersModels.fromJson(response);
-      return response;
+      statusRequest7 = StatusRequest.loading;
+      var response = await getAllCountersRes(
+        int.parse(
+          sharedPreferences.getString('id').toString(),
+        ),
+      );
+
+      statusRequest7 = handlingData(response);
+      if (statusRequest7 == StatusRequest.success) {
+        print('----------------------------------');
+        countersModels = await CountersModels.fromJson(response);
+      } else {
+        statusRequest7 = StatusRequest.failure;
+        print('----------------failure------------------');
+      }
     } catch (e) {
-      print(' erorr catch $e');
-      return 'error';
+      statusRequest7 = StatusRequest.erorr;
+      print('--------------erorr--------------------');
     }
+    update();
   }
 
   StatusRequest statusRequest1 = StatusRequest.none;
@@ -124,7 +139,7 @@ class ControlBoardController extends GetxController {
     } else {
       x = false;
     }
-
+    getAllCounters();
     super.onInit();
   }
 }

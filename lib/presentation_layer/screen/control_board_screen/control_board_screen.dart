@@ -18,6 +18,7 @@ class ControlBoardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ControlBoardController controller = Get.put(ControlBoardController());
     return Scaffold(
+      backgroundColor: ColorManager.white,
       body: InfoWidget(
         builder: (context, deviceInfo) {
           return SingleChildScrollView(
@@ -77,7 +78,7 @@ class ControlBoardScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 55,
                 ),
               ],
             ),

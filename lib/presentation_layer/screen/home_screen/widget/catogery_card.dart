@@ -23,9 +23,9 @@ class CatogeryCard extends StatelessWidget {
         );
       },
       child: SizedBox(
-        width: 100,
+        width: 180,
         child: Padding(
-          padding: const EdgeInsets.only(right: 13),
+          padding: const EdgeInsets.only(right: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -42,10 +42,11 @@ class CatogeryCard extends StatelessWidget {
                 child: Text(
                   catogeryData?.name ?? 'name',
                   textAlign: TextAlign.center,
-                  style: MangeStyles().getRegularStyle(
+                  style: MangeStyles().getBoldStyle(
                     color: ColorManager.kTextblack,
                     fontSize: FontSize.s14,
                   ),
+                  overflow: TextOverflow.clip,
                 ),
               ),
             ],

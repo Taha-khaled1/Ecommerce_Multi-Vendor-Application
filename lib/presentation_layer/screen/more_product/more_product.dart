@@ -37,7 +37,7 @@ class MoreProductScreen extends StatelessWidget {
                           Align(
                             alignment: Alignment.topRight,
                             child: Text(
-                              'لوازم الحيوانات الأليفة',
+                              'النتائج',
                               style: MangeStyles().getRegularStyle(
                                 color: ColorManager.kPrimary,
                                 fontSize: FontSize.s25,

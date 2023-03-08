@@ -7,12 +7,14 @@ import 'package:pisti/presentation_layer/components/show_dialog.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/msnge_api.dart';
+import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/resources/values_manager.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_controller/home_controller.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/widget/alerttoken.dart';
 import 'package:pisti/presentation_layer/screen/initialpage_screen/onboarding_screen/onboarding_screen.dart';
 import 'package:pisti/presentation_layer/screen/product_detalis/product_detalis_controller/product_detalis_controller.dart';
 import 'package:pisti/presentation_layer/screen/product_detalis/widget/iIncrasing_or_decrasing.dart';
-import 'package:quickalert/models/quickalert_type.dart';
 
 class ProductDetalisScreen extends StatelessWidget {
   const ProductDetalisScreen({super.key});
@@ -22,6 +24,7 @@ class ProductDetalisScreen extends StatelessWidget {
     print(Get.arguments);
     final ProductDetalisController controller =
         Get.put(ProductDetalisController());
+    final HomeController homecontroller = Get.put(HomeController());
     return Scaffold(
       body: FutureBuilder(
         builder: (ctx, snapshot) {
@@ -159,8 +162,14 @@ class ProductDetalisScreen extends StatelessWidget {
                                   color: ColorManager.kPrimary,
                                   text: 'اطلب الحين',
                                   press: () {
-                                    if (sharedPreferences.getString('id') !=
-                                        null) {
+                                    if (sharedPreferences
+                                                .getString('access_token') ==
+                                            'null' ||
+                                        sharedPreferences
+                                                .getString('access_token') ==
+                                            null) {
+                                      aleartToken(context);
+                                    } else {
                                       controller.addCart(
                                         sharedPreferences.getString('id')!,
                                         controller.productDetalisModels
@@ -170,12 +179,6 @@ class ProductDetalisScreen extends StatelessWidget {
                                         controller.count.toString(),
                                         context,
                                         isAlh7in: true,
-                                      );
-                                    } else {
-                                      showDilog(
-                                        context,
-                                        'يجب تسجيل الدخول اولا',
-                                        type: QuickAlertType.error,
                                       );
                                     }
                                   },
@@ -191,42 +194,132 @@ class ProductDetalisScreen extends StatelessWidget {
                                       BorderSide(color: ColorManager.kPrimary),
                                   text: 'اضف للسلة',
                                   press: () {
-                                    sharedPreferences.getString('id') != null
-                                        ? controller.addCart(
-                                            sharedPreferences.getString('id')!,
-                                            controller.productDetalisModels
-                                                    ?.data![0].id
-                                                    .toString() ??
-                                                '166',
-                                            controller.count.toString(),
-                                            context)
-                                        : showDilog(
-                                            context, 'يجب تسجيل الدخول اولا',
-                                            type: QuickAlertType.error);
+                                    if (sharedPreferences
+                                                .getString('access_token') ==
+                                            'null' ||
+                                        sharedPreferences
+                                                .getString('access_token') ==
+                                            null) {
+                                      aleartToken(context);
+                                    } else {
+                                      controller.addCart(
+                                        sharedPreferences.getString('id')!,
+                                        controller.productDetalisModels
+                                                ?.data![0].id
+                                                .toString() ??
+                                            '166',
+                                        controller.count.toString(),
+                                        context,
+                                      );
+                                    }
                                   },
                                 ),
                               ],
                             ),
-                            Align(
-                              alignment: Alignment.center,
-                              child: CustomButton(
-                                width: 150,
-                                rectangel: 10,
-                                haigh: 47,
-                                fontSize: 18,
-                                color: ColorManager.white,
-                                colorText: ColorManager.kPrimary,
-                                sideIs:
-                                    BorderSide(color: ColorManager.kPrimary),
-                                text: 'أضف للمقارنة',
-                                press: () {
-                                  showDilog(
-                                      context, 'تم الاضافه الي المقارنات');
-                                },
-                              ),
+                            SizedBox(
+                              height: 12,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Transform.translate(
+                                  offset: Offset(20, 0),
+                                  child: InkWell(
+                                    onTap: () {
+                                      if (sharedPreferences
+                                                  .getString('access_token') ==
+                                              'null' ||
+                                          sharedPreferences
+                                                  .getString('access_token') ==
+                                              null) {
+                                        aleartToken(context);
+                                      } else {
+                                        homecontroller.addFavorit(
+                                          int.parse(sharedPreferences
+                                              .getString('id')!),
+                                          controller.productDetalisModels!
+                                              .data![0].id!,
+                                          context,
+                                        );
+                                      }
+                                    },
+                                    child: Text(
+                                      'اضف الي قائمة الامنيات',
+                                      style: MangeStyles().getBoldStyle(
+                                        color: ColorManager.kPrimary,
+                                        fontSize: FontSize.s18,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    showDilog(
+                                      context,
+                                      'تم اضافة الي قائمة الامنيات بنجاح',
+                                    );
+                                  },
+                                  child: Text(
+                                    'أضف للمقارنة',
+                                    style: MangeStyles().getBoldStyle(
+                                      color: ColorManager.kPrimary,
+                                      fontSize: FontSize.s18,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
+                      ),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Divider(),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 25),
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            'الذهاب الي الاقسام',
+                            style: MangeStyles().getRegularStyle(
+                              color: ColorManager.kPrimary,
+                              fontSize: FontSize.s18,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Wrap(
+                        alignment: WrapAlignment.start,
+                        children: [
+                          for (int i = 0; i < catogeryTest.length; i++)
+                            CustomButton(
+                              width: 180,
+                              rectangel: 10,
+                              haigh: 47,
+                              fontSize: 18,
+                              color: ColorManager.white,
+                              colorText: ColorManager.kPrimary,
+                              sideIs: BorderSide(color: ColorManager.kPrimary),
+                              text: catogeryTest[i].name,
+                              press: () {
+                                Get.toNamed(
+                                  Routes.moreproduct,
+                                  arguments: [catogeryTest[i].id],
+                                );
+                              },
+                            ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 15,
                       ),
                     ],
                   ),
@@ -248,3 +341,19 @@ class ProductDetalisScreen extends StatelessWidget {
     );
   }
 }
+
+class CatogeryTest {
+  final int id;
+  final String name;
+
+  CatogeryTest({required this.id, required this.name});
+}
+
+List<CatogeryTest> catogeryTest = [
+  CatogeryTest(id: 7, name: 'الأزياء'),
+  CatogeryTest(id: 8, name: 'المنزل والمطبخ'),
+  CatogeryTest(id: 11, name: 'منتجات الأطفال'),
+  CatogeryTest(id: 16, name: 'لوازم مكتبية'),
+  CatogeryTest(id: 15, name: 'لوازم الحيوانات'),
+  CatogeryTest(id: 17, name: 'الكتب'),
+];

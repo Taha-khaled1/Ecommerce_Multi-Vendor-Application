@@ -12,25 +12,31 @@ class OnlyRating extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 20,
-      child: RatingBar.builder(
-        itemSize: 20,
+      child: RatingBar(
         ignoreGestures: true,
+        itemSize: 20,
         initialRating: nmuberstar.toDouble(),
-        minRating: 1,
         direction: Axis.horizontal,
         allowHalfRating: true,
         itemCount: 5,
-        itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
-        itemBuilder: (context, _) => Padding(
-          padding: const EdgeInsets.only(right: 2),
-          child: SizedBox(
-            child: SvgPicture.asset(
-              'assets/icons/star-Filled.svg',
-              color: Colors.amber,
-              width: 20,
-            ),
+        ratingWidget: RatingWidget(
+          full: SvgPicture.asset(
+            'assets/icons/star-Filled.svg',
+            color: Colors.amber,
+            width: 20,
+          ),
+          half: SvgPicture.asset(
+            'assets/icons/star-Filled.svg',
+            color: Colors.amber,
+            width: 20,
+          ),
+          empty: SvgPicture.asset(
+            'assets/icons/star-Filled.svg',
+            color: Colors.grey,
+            width: 20,
           ),
         ),
+        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
         onRatingUpdate: (rating) {
           print(rating);
         },

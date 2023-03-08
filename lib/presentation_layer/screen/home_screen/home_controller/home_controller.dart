@@ -14,46 +14,77 @@ class HomeController extends GetxController {
   ProductModels? productModels;
   ProductModels? productModelsone;
   ProductModels? productModelstow;
+
+  late StatusRequest statusRequest1;
   getAllcatogery() async {
     try {
+      statusRequest1 = StatusRequest.loading;
       var response = await getAllcatogeryRespon();
-      catogeryModels = await CatogeryModels.fromJson(response);
-      return response;
+      statusRequest1 = handlingData(response);
+      if (statusRequest1 == StatusRequest.success) {
+        print('----------------------------------');
+        catogeryModels = await CatogeryModels.fromJson(response);
+      } else {
+        statusRequest1 = StatusRequest.failure;
+      }
     } catch (e) {
-      print(' erorr catch $e');
+      statusRequest1 = StatusRequest.erorr;
     }
+    update();
   }
 
+  late StatusRequest statusRequest2;
   getAllTopProduct() async {
     try {
+      statusRequest2 = StatusRequest.loading;
       var response = await getAllTopProductRespon();
-      productModels = await ProductModels.fromJson(response);
-      return response;
+      statusRequest2 = handlingData(response);
+      if (statusRequest2 == StatusRequest.success) {
+        print('----------------------------------');
+        productModels = await ProductModels.fromJson(response);
+      } else {
+        statusRequest2 = StatusRequest.failure;
+      }
     } catch (e) {
-      print(' erorr catch $e');
+      statusRequest2 = StatusRequest.erorr;
     }
+    update();
   }
 
+  late StatusRequest statusRequest3;
   getConstantProductHomeone(int idCato, int idPage) async {
     try {
+      statusRequest3 = StatusRequest.loading;
       var response = await getProductOfCatogeryRespon(idCato, idPage);
-      productModelsone = await ProductModels.fromJson(response);
-      return response;
+      statusRequest3 = handlingData(response);
+      if (statusRequest3 == StatusRequest.success) {
+        print('----------------------------------');
+        productModelsone = await ProductModels.fromJson(response);
+      } else {
+        statusRequest3 = StatusRequest.failure;
+      }
     } catch (e) {
-      print(' erorr catch $e');
-      return 'error';
+      statusRequest3 = StatusRequest.erorr;
     }
+    update();
   }
 
+  late StatusRequest statusRequest4;
   getConstantProductHomeTow(int idCato, int idPage) async {
     try {
+      statusRequest4 = StatusRequest.loading;
       var response = await getProductOfCatogeryRespon(idCato, idPage);
-      productModelstow = await ProductModels.fromJson(response);
-      return response;
+      statusRequest4 = handlingData(response);
+      if (statusRequest4 == StatusRequest.success) {
+        print('----------------------------------');
+        productModelstow = await ProductModels.fromJson(response);
+      } else {
+        statusRequest4 = StatusRequest.failure;
+      }
     } catch (e) {
-      print(' erorr catch $e');
-      return 'error';
+      statusRequest4 = StatusRequest.erorr;
     }
+    update();
   }
 
   StatusRequest statusRequest = StatusRequest.none;
@@ -74,5 +105,14 @@ class HomeController extends GetxController {
       customSnackBar(respon['message']);
     }
     update();
+  }
+
+  @override
+  void onInit() {
+    getAllcatogery();
+    getAllTopProduct();
+    getConstantProductHomeone(15, 1);
+    getConstantProductHomeTow(6, 1);
+    super.onInit();
   }
 }

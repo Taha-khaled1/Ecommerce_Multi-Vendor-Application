@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:pisti/domain_layer/models/product_models.dart';
 import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/components/onlyrating.dart';
-import 'package:pisti/presentation_layer/handlingView/handlingview.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/msnge_api.dart';
@@ -107,11 +106,13 @@ class ProductCard extends StatelessWidget {
                         fontSize: FontSize.s16,
                       ),
                     ),
+                    SizedBox(height: 5),
                     OnlyRating(nmuberstar: dataProduct?.rating ?? 5),
                   ],
                 ),
               ),
             ),
+            SizedBox(height: 5),
             Align(
               alignment: Alignment.centerLeft,
               child: Padding(
