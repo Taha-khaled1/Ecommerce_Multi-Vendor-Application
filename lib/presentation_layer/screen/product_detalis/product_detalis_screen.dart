@@ -4,6 +4,7 @@ import 'package:pisti/main.dart';
 import 'package:pisti/presentation_layer/components/custombutten.dart';
 import 'package:pisti/presentation_layer/components/onlyrating.dart';
 import 'package:pisti/presentation_layer/components/show_dialog.dart';
+import 'package:pisti/presentation_layer/handlingView/handlingview.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/msnge_api.dart';
@@ -12,6 +13,8 @@ import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/resources/values_manager.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/home_controller/home_controller.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/widget/alerttoken.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/widget/product_card.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/widget/titelcard.dart';
 import 'package:pisti/presentation_layer/screen/initialpage_screen/onboarding_screen/onboarding_screen.dart';
 import 'package:pisti/presentation_layer/screen/product_detalis/product_detalis_controller/product_detalis_controller.dart';
 import 'package:pisti/presentation_layer/screen/product_detalis/widget/iIncrasing_or_decrasing.dart';
@@ -77,12 +80,16 @@ class ProductDetalisScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              controller.productDetalisModels?.data![0].name ??
-                                  'name',
-                              style: MangeStyles().getBoldStyle(
-                                color: ColorManager.kTextblack,
-                                fontSize: FontSize.s20,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Text(
+                                controller
+                                        .productDetalisModels?.data![0].name ??
+                                    'name',
+                                style: MangeStyles().getBoldStyle(
+                                  color: ColorManager.kTextblack,
+                                  fontSize: FontSize.s18,
+                                ),
                               ),
                             ),
                             Text(
@@ -292,43 +299,148 @@ class ProductDetalisScreen extends StatelessWidget {
                       SizedBox(
                         height: 12,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 25),
-                        child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            'الذهاب الي الاقسام',
-                            style: MangeStyles().getRegularStyle(
-                              color: ColorManager.kPrimary,
-                              fontSize: FontSize.s18,
-                            ),
-                          ),
+                      TitelCard(
+                        namecard: 'منتجات موصي بها',
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.moreproduct,
+                            arguments: [15],
+                          );
+                        },
+                      ),
+                      Container(
+                        height: 340,
+                        child: GetBuilder<HomeController>(
+                          builder: (controller) {
+                            return HandlingDataView(
+                              statusRequest: controller.statusRequest2,
+                              widget: Container(
+                                alignment: Alignment.center,
+                                height: 325,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount:
+                                      controller.productModels?.data!.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return ProductCard(
+                                      margin: 13,
+                                      dataProduct: controller
+                                          .productModels?.data![index],
+                                    );
+                                  },
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
-                      Wrap(
-                        alignment: WrapAlignment.start,
-                        children: [
-                          for (int i = 0; i < catogeryTest.length; i++)
-                            CustomButton(
-                              width: 180,
-                              rectangel: 10,
-                              haigh: 47,
-                              fontSize: 18,
-                              color: ColorManager.white,
-                              colorText: ColorManager.kPrimary,
-                              sideIs: BorderSide(color: ColorManager.kPrimary),
-                              text: catogeryTest[i].name,
-                              press: () {
-                                Get.toNamed(
-                                  Routes.moreproduct,
-                                  arguments: [catogeryTest[i].id],
-                                );
-                              },
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TitelCard(
+                        namecard: 'منتجات تم زيرتها مؤخرا',
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.moreproduct,
+                            arguments: [15],
+                          );
+                        },
+                      ),
+                      GetBuilder<HomeController>(
+                        builder: (controller) {
+                          return HandlingDataView(
+                            statusRequest: controller.statusRequest3,
+                            widget: Container(
+                              alignment: Alignment.center,
+                              height: 325,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount:
+                                    controller.productModels?.data!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return ProductCard(
+                                    margin: 13,
+                                    dataProduct: controller
+                                        .productModelsone?.data![index],
+                                  );
+                                },
+                              ),
                             ),
-                        ],
+                          );
+                        },
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 20,
+                      ),
+                      TitelCard(
+                        namecard: 'الجمال والعناية الشخصية',
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.moreproduct,
+                            arguments: [6],
+                          );
+                        },
+                      ),
+                      GetBuilder<HomeController>(
+                        builder: (controller) {
+                          return HandlingDataView(
+                            statusRequest: controller.statusRequest4,
+                            widget: Container(
+                              alignment: Alignment.center,
+                              height: 325,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount:
+                                    controller.productModels?.data!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return ProductCard(
+                                      margin: 13,
+                                      dataProduct: controller
+                                          .productModelstow?.data![index]);
+                                },
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(right: 25),
+                      //   child: Align(
+                      //     alignment: Alignment.centerRight,
+                      //     child: Text(
+                      //       'الذهاب الي الاقسام',
+                      //       style: MangeStyles().getRegularStyle(
+                      //         color: ColorManager.kPrimary,
+                      //         fontSize: FontSize.s18,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Wrap(
+                      //   alignment: WrapAlignment.start,
+                      //   children: [
+                      //     for (int i = 0; i < catogeryTest.length; i++)
+                      //       CustomButton(
+                      //         width: 180,
+                      //         rectangel: 10,
+                      //         haigh: 47,
+                      //         fontSize: 18,
+                      //         color: ColorManager.white,
+                      //         colorText: ColorManager.kPrimary,
+                      //         sideIs: BorderSide(color: ColorManager.kPrimary),
+                      //         text: catogeryTest[i].name,
+                      //         press: () {
+                      //           Get.toNamed(
+                      //             Routes.moreproduct,
+                      //             arguments: [catogeryTest[i].id],
+                      //           );
+                      //         },
+                      //       ),
+                      //   ],
+                      // ),
+                      SizedBox(
+                        height: 20,
                       ),
                     ],
                   ),

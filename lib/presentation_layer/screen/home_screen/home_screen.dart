@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                       statusRequest: controller.statusRequest1,
                       widget: Container(
                         alignment: Alignment.center,
-                        height: 240,
+                        height: 210,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.catogeryModels?.data?.length,
@@ -226,14 +226,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   // final autoSizeGroup = AutoSizeGroup();
   var _bottomNavIndex = 0; //default index of a first screen
 
-  late AnimationController _fabAnimationController;
-  late AnimationController _borderRadiusAnimationController;
-  late Animation<double> fabAnimation;
-  late Animation<double> borderRadiusAnimation;
-  late CurvedAnimation fabCurve;
-  late CurvedAnimation borderRadiusCurve;
-  late AnimationController _hideBottomBarAnimationController;
-
   final iconList = <String>[
     'assets/icons/icons8-home.svg',
     'assets/icons/nL9xtA01.svg',
@@ -249,67 +241,64 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    final systemTheme = SystemUiOverlayStyle.light.copyWith(
-      systemNavigationBarColor: HexColor('#373A36'),
-      systemNavigationBarIconBrightness: Brightness.light,
-    );
-    SystemChrome.setSystemUIOverlayStyle(systemTheme);
+    // final systemTheme = SystemUiOverlayStyle.light.copyWith(
+    //   systemNavigationBarColor: HexColor('#373A36'),
+    //   systemNavigationBarIconBrightness: Brightness.light,
+    // );
+    // SystemChrome.setSystemUIOverlayStyle(systemTheme);
 
-    _fabAnimationController = AnimationController(
-      duration: Duration(milliseconds: 500),
-      vsync: this,
-    );
-    _borderRadiusAnimationController = AnimationController(
-      duration: Duration(milliseconds: 500),
-      vsync: this,
-    );
-    fabCurve = CurvedAnimation(
-      parent: _fabAnimationController,
-      curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
-    );
-    borderRadiusCurve = CurvedAnimation(
-      parent: _borderRadiusAnimationController,
-      curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
-    );
+    // _fabAnimationController = AnimationController(
+    //   duration: Duration(milliseconds: 500),
+    //   vsync: this,
+    // );
 
-    fabAnimation = Tween<double>(begin: 0, end: 1).animate(fabCurve);
-    borderRadiusAnimation = Tween<double>(begin: 0, end: 1).animate(
-      borderRadiusCurve,
-    );
+    // fabCurve = CurvedAnimation(
+    //   parent: _fabAnimationController,
+    //   curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
+    // );
+    // borderRadiusCurve = CurvedAnimation(
+    //   parent: _borderRadiusAnimationController,
+    //   curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
+    // );
 
-    _hideBottomBarAnimationController = AnimationController(
-      duration: Duration(milliseconds: 200),
-      vsync: this,
-    );
+    // fabAnimation = Tween<double>(begin: 0, end: 1).animate(fabCurve);
+    // borderRadiusAnimation = Tween<double>(begin: 0, end: 1).animate(
+    //   borderRadiusCurve,
+    // );
 
-    Future.delayed(
-      Duration(seconds: 1),
-      () => _fabAnimationController.forward(),
-    );
-    Future.delayed(
-      Duration(seconds: 1),
-      () => _borderRadiusAnimationController.forward(),
-    );
+    // _hideBottomBarAnimationController = AnimationController(
+    //   duration: Duration(milliseconds: 200),
+    //   vsync: this,
+    // );
+
+    // Future.delayed(
+    //   Duration(seconds: 1),
+    //   () => _fabAnimationController.forward(),
+    // );
+    // Future.delayed(
+    //   Duration(seconds: 1),
+    //   () => _borderRadiusAnimationController.forward(),
+    // );
   }
 
-  bool onScrollNotification(ScrollNotification notification) {
-    if (notification is UserScrollNotification &&
-        notification.metrics.axis == Axis.vertical) {
-      switch (notification.direction) {
-        case ScrollDirection.forward:
-          _hideBottomBarAnimationController.reverse();
-          _fabAnimationController.forward(from: 0);
-          break;
-        case ScrollDirection.reverse:
-          _hideBottomBarAnimationController.forward();
-          _fabAnimationController.reverse(from: 1);
-          break;
-        case ScrollDirection.idle:
-          break;
-      }
-    }
-    return false;
-  }
+  // bool onScrollNotification(ScrollNotification notification) {
+  //   if (notification is UserScrollNotification &&
+  //       notification.metrics.axis == Axis.vertical) {
+  //     switch (notification.direction) {
+  //       case ScrollDirection.forward:
+  //         _hideBottomBarAnimationController.reverse();
+  //         _fabAnimationController.forward(from: 0);
+  //         break;
+  //       case ScrollDirection.reverse:
+  //         _hideBottomBarAnimationController.forward();
+  //         _fabAnimationController.reverse(from: 1);
+  //         break;
+  //       case ScrollDirection.idle:
+  //         break;
+  //     }
+  //   }
+  //   return false;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -318,7 +307,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       child: Scaffold(
         extendBody: true,
         body: NotificationListener<ScrollNotification>(
-          onNotification: onScrollNotification,
+          // onNotification: onScrollNotification,
           child: iconLisdt[_bottomNavIndex],
         ),
         floatingActionButton: FloatingActionButton(
@@ -330,10 +319,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             width: 40,
           ),
           onPressed: () {
-            _fabAnimationController.reset();
-            _borderRadiusAnimationController.reset();
-            _borderRadiusAnimationController.forward();
-            _fabAnimationController.forward();
+            // _fabAnimationController.reset();
+            // _borderRadiusAnimationController.reset();
+            // _borderRadiusAnimationController.forward();
+            // _fabAnimationController.forward();
             if (sharedPreferences.getString('access_token') == 'null' ||
                 sharedPreferences.getString('access_token') == null) {
               aleartToken(context);
@@ -363,7 +352,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           backgroundColor: Colors.white,
           activeIndex: _bottomNavIndex,
           splashColor: HexColor('#FFA400'),
-          notchAndCornersAnimation: borderRadiusAnimation,
+          //  notchAndCornersAnimation: borderRadiusAnimation,
           splashSpeedInMilliseconds: 300,
           notchSmoothness: NotchSmoothness.defaultEdge,
           gapLocation: GapLocation.center,
@@ -378,7 +367,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               setState(() => _bottomNavIndex = index);
             }
           },
-          hideAnimationController: _hideBottomBarAnimationController,
+          //   hideAnimationController: _hideBottomBarAnimationController,
           shadow: BoxShadow(
             offset: Offset(0, 1),
             blurRadius: 12,
