@@ -16,8 +16,6 @@ class NotificationListScreen extends StatelessWidget {
       appBar: appbar(),
       body: 1 == 2
           ? Column(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 15),

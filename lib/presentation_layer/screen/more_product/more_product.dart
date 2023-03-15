@@ -6,6 +6,7 @@ import 'package:pisti/presentation_layer/components/appbar1.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_screen.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/widget/product_card.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/widget/search_bar.dart';
 import 'package:pisti/presentation_layer/screen/more_product/more_product_controller/more_product_controller.dart';
@@ -18,6 +19,7 @@ class MoreProductScreen extends StatelessWidget {
     print(Get.arguments);
     final MoreProductController controller = Get.put(MoreProductController());
     return Scaffold(
+      bottomNavigationBar: Navb(),
       backgroundColor: ColorManager.white,
       appBar: appbar(),
       body: GetBuilder<MoreProductController>(

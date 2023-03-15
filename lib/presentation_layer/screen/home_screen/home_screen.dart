@@ -8,6 +8,7 @@ import 'package:pisti/presentation_layer/handlingView/handlingview.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/screen/cart_screen/cart_screen.dart';
+import 'package:pisti/presentation_layer/screen/catogery_screen.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/control_board_screen.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/screens/notification_list_screen/notification_list_screen.dart';
 import 'package:pisti/presentation_layer/screen/favourite_screen/favourite_screen.dart';
@@ -270,24 +271,14 @@ class Navb extends StatelessWidget {
             svg: 'assets/icons/icons8-home.svg',
             title: 'الرئيسيه',
             onTap: () {
-              if (sharedPreferences.getString('access_token') == 'null' ||
-                  sharedPreferences.getString('access_token') == null) {
-                aleartToken(context);
-              } else {
-                Get.toNamed(Routes.homeRoute);
-              }
+              Get.toNamed(Routes.homeRoute);
             },
           ),
           CustomIcon(
             svg: 'assets/images/menu.svg',
             title: 'التصنيفات',
             onTap: () {
-              if (sharedPreferences.getString('access_token') == 'null' ||
-                  sharedPreferences.getString('access_token') == null) {
-                aleartToken(context);
-              } else {
-                Get.to(Routes.homeRoute);
-              }
+              Get.to(() => CatogeryScreen());
             },
           ),
           CustomIcon(
@@ -298,7 +289,7 @@ class Navb extends StatelessWidget {
                   sharedPreferences.getString('access_token') == null) {
                 aleartToken(context);
               } else {
-                Get.to(CartScreen());
+                Get.to(() => CartScreen());
               }
             },
           ),
@@ -310,7 +301,7 @@ class Navb extends StatelessWidget {
                   sharedPreferences.getString('access_token') == null) {
                 aleartToken(context);
               } else {
-                Get.to(NotificationListScreen());
+                Get.to(() => NotificationListScreen());
               }
             },
           ),
@@ -322,7 +313,7 @@ class Navb extends StatelessWidget {
                     sharedPreferences.getString('access_token') == null) {
                   aleartToken(context);
                 } else {
-                  Get.to(ControlBoardScreen());
+                  Get.to(() => ControlBoardScreen());
                 }
               }),
         ],
