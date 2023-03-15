@@ -28,8 +28,8 @@ class HomeScreen extends StatelessWidget {
     List<Widget> xitem = [
       Container(
         margin: EdgeInsets.symmetric(horizontal: 12),
-        width: MediaQuery.of(context).size.width * 0.9,
-        height: 225,
+        width: MediaQuery.of(context).size.width,
+        height: 250,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           image: DecorationImage(
@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                       options: CarouselOptions(
                         height: 400,
                         aspectRatio: 16 / 9,
-                        viewportFraction: 0.8,
+                        viewportFraction: 1,
                         initialPage: 0,
                         enableInfiniteScroll: true,
                         reverse: false,
@@ -160,14 +160,14 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
                 Container(
-                  height: 340,
+                  height: 315,
                   child: GetBuilder<HomeController>(
                     builder: (controller) {
                       return HandlingDataView(
                         statusRequest: controller.statusRequest2,
                         widget: Container(
                           alignment: Alignment.center,
-                          height: 325,
+                          height: 315,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: controller.productModels?.data!.length,
@@ -199,7 +199,7 @@ class HomeScreen extends StatelessWidget {
                       statusRequest: controller.statusRequest3,
                       widget: Container(
                         alignment: Alignment.center,
-                        height: 325,
+                        height: 315,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.productModels?.data!.length,
@@ -230,7 +230,7 @@ class HomeScreen extends StatelessWidget {
                       statusRequest: controller.statusRequest4,
                       widget: Container(
                         alignment: Alignment.center,
-                        height: 325,
+                        height: 315,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: controller.productModels?.data!.length,
@@ -278,7 +278,7 @@ class Navb extends StatelessWidget {
             svg: 'assets/images/menu.svg',
             title: 'التصنيفات',
             onTap: () {
-              Get.to(() => CatogeryScreen());
+              Get.off(() => CatogeryScreen());
             },
           ),
           CustomIcon(

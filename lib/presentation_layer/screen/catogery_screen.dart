@@ -16,6 +16,7 @@ class CatogeryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final HomeController controller = Get.put(HomeController());
     return Scaffold(
+      backgroundColor: Colors.grey[100],
       bottomNavigationBar: Navb(),
       body: GetBuilder<HomeController>(
         builder: (controller) {
@@ -41,16 +42,16 @@ class CatogeryScreen extends StatelessWidget {
                       margin: EdgeInsets.only(
                           top: 10, right: 7, left: 7, bottom: 5),
                       decoration: BoxDecoration(
-                        color: Colors.grey[200],
+                        color: Colors.grey[100],
                         borderRadius: BorderRadius.circular(15),
                         boxShadow: [
                           BoxShadow(
-                            offset: Offset(1, 4),
-                            color: Colors.grey.withOpacity(0.7),
+                            offset: Offset(-1, -4),
+                            color: Colors.grey.withOpacity(0.4),
                           ),
                           BoxShadow(
-                            offset: Offset(4, 1),
-                            color: Colors.grey.withOpacity(0.7),
+                            offset: Offset(1, 4),
+                            color: Colors.grey.withOpacity(0.4),
                           ),
                         ],
                       ),

@@ -37,8 +37,8 @@ class ProductCard extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(right: margin ?? 0),
-        width: 205,
-        height: 140,
+        width: 200,
+        height: 135,
         decoration: BoxDecoration(
           color: ColorManager.grey2,
           borderRadius: BorderRadius.circular(15),
@@ -57,8 +57,8 @@ class ProductCard extends StatelessWidget {
                     errorBuilder: (context, error, stackTrace) {
                       return Image.asset('assets/images/Rectangle 19.png');
                     },
-                    width: 190,
-                    height: 210,
+                    width: 180,
+                    height: 205,
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -108,7 +108,7 @@ class ProductCard extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: MangeStyles().getRegularStyle(
                         color: ColorManager.kTextblack,
-                        fontSize: FontSize.s16,
+                        fontSize: FontSize.s14,
                       ),
                     ),
                     SizedBox(height: 5),

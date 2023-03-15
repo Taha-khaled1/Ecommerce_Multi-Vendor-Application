@@ -57,22 +57,23 @@ class ProductDetalisScreen extends StatelessWidget {
                         height: 370,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                bottomRight:
-                                    Radius.circular(20)), //assets/images/s.png
-                            image: controller
-                                        .productDetalisModels?.data![0].name !=
-                                    'بوتي'
-                                ? DecorationImage(
-                                    image: NetworkImage(
-                                        '${APiMange.baseurlImage}/${controller.productDetalisModels?.data![0].thumbnailImage.toString()}'),
-                                    fit: BoxFit.cover,
-                                  )
-                                : DecorationImage(
-                                    image: AssetImage('assets/images/s.png'),
-                                    fit: BoxFit.cover,
-                                  )),
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(20),
+                              bottomRight:
+                                  Radius.circular(20)), //assets/images/s.png
+                          image:
+                              controller.productDetalisModels?.data![0].name !=
+                                      'بوتي'
+                                  ? DecorationImage(
+                                      image: NetworkImage(
+                                          '${APiMange.baseurlImage}/${controller.productDetalisModels?.data![0].thumbnailImage.toString()}'),
+                                      fit: BoxFit.cover,
+                                    )
+                                  : DecorationImage(
+                                      image: AssetImage('assets/images/s.png'),
+                                      fit: BoxFit.cover,
+                                    ),
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8, top: 10),
                           child: CircleButton(
@@ -326,7 +327,7 @@ class ProductDetalisScreen extends StatelessWidget {
                               statusRequest: controller.statusRequest2,
                               widget: Container(
                                 alignment: Alignment.center,
-                                height: 325,
+                                height: 315,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemCount:
@@ -363,7 +364,7 @@ class ProductDetalisScreen extends StatelessWidget {
                             statusRequest: controller.statusRequest3,
                             widget: Container(
                               alignment: Alignment.center,
-                              height: 325,
+                              height: 315,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount:
@@ -398,7 +399,7 @@ class ProductDetalisScreen extends StatelessWidget {
                             statusRequest: controller.statusRequest4,
                             widget: Container(
                               alignment: Alignment.center,
-                              height: 325,
+                              height: 315,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount:
