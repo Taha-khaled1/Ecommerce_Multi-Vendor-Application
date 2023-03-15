@@ -13,13 +13,18 @@ class SearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: TextField(
-        style: const TextStyle(height: 1.3, color: Colors.black),
+        style: const TextStyle(height: 0.7, color: Colors.black),
         decoration: InputDecoration(
           filled: true,
           fillColor: kBackgroundColor,
-          hintStyle: TextStyle(color: Colors.black, fontSize: 18),
+          hintStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.5,
+          ),
           hintText: 'ابحث عن منتجك...',
           prefixIcon: InkWell(
             onTap: () {
@@ -32,11 +37,13 @@ class SearchBar extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
                 'assets/icons/Frame 3.svg',
+                width: 15,
+                height: 15,
               ),
             ),
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(5),
             borderSide: BorderSide.none,
           ),
         ),

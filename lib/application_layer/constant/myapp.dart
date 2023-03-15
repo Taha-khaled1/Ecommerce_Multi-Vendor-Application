@@ -1,4 +1,6 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pisti/presentation_layer/resources/routes_pages.dart';
 import 'package:pisti/presentation_layer/resources/theme_manager.dart';
@@ -13,7 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: getApplicationTheme(),
       getPages: getPage,
-      home: MyHomePage(title: 'title'),
+      home: HomeScreen(),
     );
   }
 }
+// ignore: unused_element
+

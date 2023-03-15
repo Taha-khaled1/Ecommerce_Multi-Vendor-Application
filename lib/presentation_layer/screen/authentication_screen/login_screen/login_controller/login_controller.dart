@@ -76,5 +76,6 @@ void customSnackBar(String massg) {
     massg,
     icon: Icon(Icons.person, color: Colors.white),
     snackPosition: SnackPosition.TOP,
+    backgroundColor: Colors.teal,
   );
 }
