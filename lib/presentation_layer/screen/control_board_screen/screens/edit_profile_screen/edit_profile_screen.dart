@@ -17,6 +17,7 @@ import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/resources/values_manager.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/screens/edit_profile_screen/controller/edit_profile_controller.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/customListtile.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({super.key});
@@ -32,6 +33,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Navb(),
       backgroundColor: Colors.white,
       appBar: appbar(),
       body: InfoWidget(

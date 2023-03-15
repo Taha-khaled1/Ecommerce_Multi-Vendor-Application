@@ -12,6 +12,7 @@ import 'package:pisti/presentation_layer/resources/values_manager.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/screens/add_product_screen/add_product_controller/add_product_controller.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/customListtile.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/shope_settinges.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_screen.dart';
 
 class AddProductScreen extends StatelessWidget {
   const AddProductScreen({super.key});
@@ -22,6 +23,7 @@ class AddProductScreen extends StatelessWidget {
       init: AddProductController(),
       builder: (controller) {
         return Scaffold(
+          bottomNavigationBar: Navb(),
           backgroundColor: ColorManager.grey2,
           appBar: appbar(),
           body: Container(

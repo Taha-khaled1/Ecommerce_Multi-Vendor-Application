@@ -245,10 +245,7 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: 40,
+                  height: 5,
                 ),
               ],
             );
@@ -269,13 +266,65 @@ class Navb extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CustomIcon(svg: 'assets/icons/icons8-home.svg', title: 'الرئيسيه'),
-          CustomIcon(svg: 'assets/images/menu.svg', title: 'التصنيفات'),
-          CustomIcon(svg: 'assets/icons/sh.svg', title: 'عربة التسوق'),
           CustomIcon(
-              svg: 'assets/icons/icons8-notification-50.svg',
-              title: 'الاشعارات'),
-          CustomIcon(svg: 'assets/icons/user-6767.svg', title: 'الحساب'),
+            svg: 'assets/icons/icons8-home.svg',
+            title: 'الرئيسيه',
+            onTap: () {
+              if (sharedPreferences.getString('access_token') == 'null' ||
+                  sharedPreferences.getString('access_token') == null) {
+                aleartToken(context);
+              } else {
+                Get.toNamed(Routes.homeRoute);
+              }
+            },
+          ),
+          CustomIcon(
+            svg: 'assets/images/menu.svg',
+            title: 'التصنيفات',
+            onTap: () {
+              if (sharedPreferences.getString('access_token') == 'null' ||
+                  sharedPreferences.getString('access_token') == null) {
+                aleartToken(context);
+              } else {
+                Get.to(Routes.homeRoute);
+              }
+            },
+          ),
+          CustomIcon(
+            svg: 'assets/icons/sh.svg',
+            title: 'عربة التسوق',
+            onTap: () {
+              if (sharedPreferences.getString('access_token') == 'null' ||
+                  sharedPreferences.getString('access_token') == null) {
+                aleartToken(context);
+              } else {
+                Get.to(CartScreen());
+              }
+            },
+          ),
+          CustomIcon(
+            svg: 'assets/icons/icons8-notification-50.svg',
+            title: 'الاشعارات',
+            onTap: () {
+              if (sharedPreferences.getString('access_token') == 'null' ||
+                  sharedPreferences.getString('access_token') == null) {
+                aleartToken(context);
+              } else {
+                Get.to(NotificationListScreen());
+              }
+            },
+          ),
+          CustomIcon(
+              svg: 'assets/icons/user-6767.svg',
+              title: 'الحساب',
+              onTap: () {
+                if (sharedPreferences.getString('access_token') == 'null' ||
+                    sharedPreferences.getString('access_token') == null) {
+                  aleartToken(context);
+                } else {
+                  Get.to(ControlBoardScreen());
+                }
+              }),
         ],
       ),
     );
@@ -283,25 +332,26 @@ class Navb extends StatelessWidget {
 }
 
 class CustomIcon extends StatelessWidget {
-  const CustomIcon({
-    super.key,
-    required this.svg,
-    required this.title,
-  });
+  const CustomIcon(
+      {super.key, required this.svg, required this.title, required this.onTap});
   final String svg, title;
+  final void Function() onTap;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SvgPicture.asset(
-          svg,
-          width: 30,
-          height: 30,
-        ),
-        Text(title)
-      ],
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            svg,
+            width: 30,
+            height: 30,
+          ),
+          Text(title)
+        ],
+      ),
     );
   }
 }

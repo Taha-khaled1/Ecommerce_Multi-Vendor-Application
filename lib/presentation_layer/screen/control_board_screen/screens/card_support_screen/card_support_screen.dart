@@ -8,6 +8,7 @@ import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/resources/values_manager.dart';
 import 'package:pisti/presentation_layer/screen/Shipping_info_screen/widget/addAdreesContainer.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/screens/card_support_screen/widget/add_card.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_screen.dart';
 
 class CardSupportScreen extends StatelessWidget {
   const CardSupportScreen({super.key});
@@ -15,6 +16,7 @@ class CardSupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Navb(),
       backgroundColor: ColorManager.white,
       appBar: appbar(),
       body: InfoWidget(

@@ -11,6 +11,7 @@ import 'package:pisti/presentation_layer/resources/msnge_api.dart';
 import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/screen/favourite_screen/favourite_controller/favourite_controller.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_screen.dart';
 import 'package:pisti/presentation_layer/screen/initialpage_screen/onboarding_screen/onboarding_screen.dart';
 import 'package:pisti/presentation_layer/screen/more_product/more_product.dart';
 
@@ -21,6 +22,7 @@ class FavouriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final FavouriteController controller = Get.put(FavouriteController());
     return Scaffold(
+      bottomNavigationBar: Navb(),
       backgroundColor: ColorManager.white,
       appBar: appbar(),
       body: InfoWidget(

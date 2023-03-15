@@ -10,6 +10,7 @@ import 'package:pisti/presentation_layer/screen/control_board_screen/widget/allL
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/controllerBoardWidget.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/customAppBarControllerProfile.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/widget/register_shope.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_screen.dart';
 
 class ControlBoardScreen extends StatelessWidget {
   const ControlBoardScreen({super.key});
@@ -18,6 +19,7 @@ class ControlBoardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ControlBoardController controller = Get.put(ControlBoardController());
     return Scaffold(
+      bottomNavigationBar: Navb(),
       backgroundColor: ColorManager.white,
       body: InfoWidget(
         builder: (context, deviceInfo) {

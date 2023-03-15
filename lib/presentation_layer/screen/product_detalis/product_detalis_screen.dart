@@ -12,6 +12,7 @@ import 'package:pisti/presentation_layer/resources/routes_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/resources/values_manager.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/home_controller/home_controller.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_screen.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/widget/alerttoken.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/widget/product_card.dart';
 import 'package:pisti/presentation_layer/screen/home_screen/widget/titelcard.dart';
@@ -28,6 +29,7 @@ class ProductDetalisScreen extends StatelessWidget {
     print(Get.arguments);
     final HomeController homecontroller = Get.put(HomeController());
     return Scaffold(
+      bottomNavigationBar: Navb(),
       body: FutureBuilder(
         builder: (ctx, snapshot) {
           // Checking if future is resolved or not

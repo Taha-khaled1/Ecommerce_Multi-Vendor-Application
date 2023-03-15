@@ -13,6 +13,7 @@ import 'package:pisti/presentation_layer/resources/styles_manager.dart';
 import 'package:pisti/presentation_layer/resources/values_manager.dart';
 import 'package:pisti/presentation_layer/screen/Shipping_info_screen/widget/addAdreesContainer.dart';
 import 'package:pisti/presentation_layer/screen/control_board_screen/screens/coupon_screen/coponController.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_screen.dart';
 
 class CouponScreen extends StatelessWidget {
   const CouponScreen({super.key});
@@ -25,6 +26,7 @@ class CouponScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final CouponController controller = Get.put(CouponController());
     return Scaffold(
+      bottomNavigationBar: Navb(),
       backgroundColor: ColorManager.white,
       appBar: appbar(),
       body: InfoWidget(

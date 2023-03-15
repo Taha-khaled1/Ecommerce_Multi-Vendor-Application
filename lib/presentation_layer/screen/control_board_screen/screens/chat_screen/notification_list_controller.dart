@@ -3,6 +3,7 @@ import 'package:pisti/presentation_layer/components/appbar1.dart';
 import 'package:pisti/presentation_layer/resources/color_manager.dart';
 import 'package:pisti/presentation_layer/resources/font_manager.dart';
 import 'package:pisti/presentation_layer/resources/styles_manager.dart';
+import 'package:pisti/presentation_layer/screen/home_screen/home_screen.dart';
 
 class ChateScreen extends StatelessWidget {
   const ChateScreen({super.key});
@@ -10,6 +11,7 @@ class ChateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Navb(),
       backgroundColor: ColorManager.white,
       appBar: appbar(),
       body: 1 == 2
