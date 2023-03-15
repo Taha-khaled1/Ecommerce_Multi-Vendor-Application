@@ -25,7 +25,12 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(
+        print(
+          'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+        );
+        //  Get.to(() => ProductDetalisScreen(), arguments: [dataProduct!.id ?? 6]);
+
+        Get.offAndToNamed(
           Routes.productDetailsRoute,
           arguments: [dataProduct!.id ?? 6],
         );

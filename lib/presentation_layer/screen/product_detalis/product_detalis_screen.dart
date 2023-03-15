@@ -20,13 +20,12 @@ import 'package:pisti/presentation_layer/screen/product_detalis/product_detalis_
 import 'package:pisti/presentation_layer/screen/product_detalis/widget/iIncrasing_or_decrasing.dart';
 
 class ProductDetalisScreen extends StatelessWidget {
-  const ProductDetalisScreen({super.key});
-
+  ProductDetalisScreen({super.key});
+  final ProductDetalisController controller =
+      Get.put(ProductDetalisController(), permanent: true);
   @override
   Widget build(BuildContext context) {
     print(Get.arguments);
-    final ProductDetalisController controller =
-        Get.put(ProductDetalisController());
     final HomeController homecontroller = Get.put(HomeController());
     return Scaffold(
       body: FutureBuilder(
@@ -56,20 +55,29 @@ class ProductDetalisScreen extends StatelessWidget {
                         height: 370,
                         width: double.infinity,
                         decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(
-                                '${APiMange.baseurlImage}/${controller.productDetalisModels?.data![0].thumbnailImage.toString()}'),
-                            fit: BoxFit.cover,
-                          ),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(20),
+                                bottomRight:
+                                    Radius.circular(20)), //assets/images/s.png
+                            image: controller
+                                        .productDetalisModels?.data![0].name !=
+                                    'بوتي'
+                                ? DecorationImage(
+                                    image: NetworkImage(
+                                        '${APiMange.baseurlImage}/${controller.productDetalisModels?.data![0].thumbnailImage.toString()}'),
+                                    fit: BoxFit.cover,
+                                  )
+                                : DecorationImage(
+                                    image: AssetImage('assets/images/s.png'),
+                                    fit: BoxFit.cover,
+                                  )),
                         child: Padding(
                           padding: const EdgeInsets.only(right: 8, top: 10),
                           child: CircleButton(
                             size: 50,
                             color1: Colors.grey[200],
                             onTap: () {
-                              Get.back();
+                              Get.offAllNamed(Routes.homeRoute);
                             },
                             iconData: 'assets/icons/arrow.svg',
                           ),

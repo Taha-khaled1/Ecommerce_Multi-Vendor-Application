@@ -33,11 +33,6 @@ class HomeScreen extends StatelessWidget {
     final HomeController controller = Get.put(HomeController());
     return Scaffold(
       backgroundColor: ColorManager.white,
-      //  bottomNavigationBar: const BottomNavHomeScreen(),
-      appBar: AppBar(
-        backgroundColor: ColorManager.white,
-        elevation: 0,
-      ),
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
@@ -45,10 +40,13 @@ class HomeScreen extends StatelessWidget {
           builder: (context, deviceInfo) {
             return ListView(
               children: [
+                const SizedBox(
+                  height: 15,
+                ),
                 SearchBar(kBackgroundColor: ColorManager.grey2),
                 const ThreeText(),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 12),
