@@ -22,7 +22,7 @@ class TitelCard extends StatelessWidget {
             namecard,
             style: MangeStyles().getBoldStyle(
               color: ColorManager.kPrimary,
-              fontSize: FontSize.s20,
+              fontSize: FontSize.s16,
             ),
           ),
           MaterialButton(
