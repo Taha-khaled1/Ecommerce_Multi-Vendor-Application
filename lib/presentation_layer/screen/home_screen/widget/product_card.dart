@@ -37,7 +37,7 @@ class ProductCard extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(right: margin ?? 0),
-        width: 200,
+        width: 190,
         height: 135,
         decoration: BoxDecoration(
           color: ColorManager.grey2,
@@ -57,7 +57,7 @@ class ProductCard extends StatelessWidget {
                     errorBuilder: (context, error, stackTrace) {
                       return Image.asset('assets/images/Rectangle 19.png');
                     },
-                    width: 180,
+                    width: 175,
                     height: 205,
                     fit: BoxFit.fill,
                   ),

@@ -15,7 +15,13 @@ class SearchBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: TextField(
-        style: const TextStyle(height: 0.7, color: Colors.black),
+        autocorrect: false,
+        enableSuggestions: false,
+        style: const TextStyle(
+          height: 0.7,
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
         decoration: InputDecoration(
           filled: true,
           fillColor: kBackgroundColor,
@@ -23,7 +29,6 @@ class SearchBar extends StatelessWidget {
             color: Colors.black,
             fontSize: 15,
             fontWeight: FontWeight.bold,
-            letterSpacing: 1.5,
           ),
           hintText: 'ابحث عن منتجك...',
           prefixIcon: InkWell(

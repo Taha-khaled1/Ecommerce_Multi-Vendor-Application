@@ -23,7 +23,7 @@ class CatogeryCard extends StatelessWidget {
         );
       },
       child: SizedBox(
-        width: 120,
+        width: 105,
         child: Padding(
           padding: const EdgeInsets.only(right: 15),
           child: Column(
