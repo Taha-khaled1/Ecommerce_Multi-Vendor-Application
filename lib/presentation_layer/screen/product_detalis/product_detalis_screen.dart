@@ -368,7 +368,7 @@ class ProductDetalisScreen extends StatelessWidget {
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount:
-                                    controller.productModels?.data!.length,
+                                    controller.productModelsone?.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return ProductCard(
                                     margin: 13,
@@ -403,7 +403,7 @@ class ProductDetalisScreen extends StatelessWidget {
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
                                 itemCount:
-                                    controller.productModels?.data!.length,
+                                    controller.productModelstow?.data!.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return ProductCard(
                                       margin: 13,

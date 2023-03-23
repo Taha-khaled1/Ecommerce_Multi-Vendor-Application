@@ -172,6 +172,7 @@ class HomeScreen extends StatelessWidget {
                             scrollDirection: Axis.horizontal,
                             itemCount: controller.productModels?.data!.length,
                             itemBuilder: (BuildContext context, int index) {
+                              print(controller.productModels?.data!.length);
                               return ProductCard(
                                 margin: 10,
                                 dataProduct:
@@ -202,8 +203,9 @@ class HomeScreen extends StatelessWidget {
                         height: 315,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: controller.productModels?.data!.length,
+                          itemCount: controller.productModelsone?.data!.length,
                           itemBuilder: (BuildContext context, int index) {
+                            print(controller.productModelsone?.data!.length);
                             return ProductCard(
                               margin: 10,
                               dataProduct:
@@ -233,8 +235,9 @@ class HomeScreen extends StatelessWidget {
                         height: 315,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: controller.productModels?.data!.length,
+                          itemCount: controller.productModelstow?.data!.length,
                           itemBuilder: (BuildContext context, int index) {
+                            print(controller.productModelstow?.data!.length);
                             return ProductCard(
                                 margin: 10,
                                 dataProduct:
